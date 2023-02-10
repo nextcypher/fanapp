@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
 import Autocomplete from "react-google-autocomplete";
 import axios from "axios";
-import { API_KEY, GOOGLE_API_KEY } from "../../utils/api.contant";
+import { API_KEY, GOOGLE_KEY } from "../../utils/api.contant";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+
+const address = "2566 Shallowford Rd NE Atlanta, GA 30345";
 
 const Setting = () => {
   const [shippingAddress, setShippingAddress] = useState("");
@@ -18,6 +20,9 @@ const Setting = () => {
   const { library, account } = useWeb3React();
 
   useEffect(() => {
+    validateAddress(address).then((res) => {
+      console.log(res);
+    });
     const fetchData = async () => {
       try {
         if (account) {
@@ -37,6 +42,37 @@ const Setting = () => {
     fetchData();
   });
 
+  async function validateAddress1(address) {
+    const response = await axios.get(
+      `https://api.smartystreets.com/street-address?auth-id=YOUR_AUTH_ID&auth-token=YOUR_AUTH_TOKEN&street=${address}`
+    );
+    const data = response.data;
+
+    if (data.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  async function validateAddress(address) {
+    const response = await axios.get(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${GOOGLE_KEY}`
+    );
+    const data = response.data;
+
+    if (data.status === "OK") {
+      console.log("data.result", data.results);
+      for (const result of data.results) {
+        if (result.formatted_address.includes(address)) {
+          return true;
+        }
+      }
+      return false;
+    } else {
+      return false;
+    }
+  }
   const convertPart = (str: string) => {
     switch (str) {
       case "postal_code":
@@ -120,44 +156,7 @@ const Setting = () => {
             <Tab>International</Tab>
           </TabList>
           <TabPanel className="ml-[50px]">
-            <div className="App">
-              <Autocomplete
-                style={{
-                  width: "80%",
-                  marginTop: "20px",
-                }}
-                apiKey={GOOGLE_API_KEY}
-                onPlaceSelected={(place) => {
-                  console.log("place", place);
-                  setAddressHeap(place.address_components);
-                  setShippingAddress(place?.formatted_address);
-                }}
-                options={{
-                  componentRestrictions: { country: "us" },
-                  types: ["(regions)"],
-                }}
-              />
-            </div>
-            <div>
-              {addressHeap?.map((element, index) => {
-                return (
-                  <div className="grid grid-cols-10 mt-[10px]">
-                    <div className="col-sapn-3 whitespace-nowrap mt-[10px] flex justify-end">
-                      {convertPart(element.types[0])} :
-                    </div>
-                    <div className="col-span-7">
-                      <input
-                        type="text"
-                        value={element?.long_name}
-                        className="focus:border hover:border hover:border-[#828282] border border-[#333333] w-[80%] bg-black font-['Poppins'] text-[16px] leading-[29px] pl-[25px]"
-                        placeholder=""
-                      ></input>
-                      <br />
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+            <div className="App"></div>
             {isChecked ? (
               <div
                 onClick={updateMessage}
@@ -175,40 +174,7 @@ const Setting = () => {
             )}
           </TabPanel>
           <TabPanel className="ml-[50px]">
-            <div className="App">
-              <Autocomplete
-                style={{ width: "80%", marginTop: "20px" }}
-                apiKey={GOOGLE_API_KEY}
-                onPlaceSelected={(place) => {
-                  console.log("place", place);
-                  setInterAddHeap(place.address_components);
-                  setShippingAddress(place?.formatted_address);
-                }}
-                options={{
-                  types: ["(regions)"],
-                }}
-              />
-            </div>
-            <div>
-              {interAddHeap?.map((element, index) => {
-                return (
-                  <div className="grid grid-cols-10 mt-[10px]">
-                    <div className="col-sapn-3 whitespace-nowrap mt-[10px] flex justify-end">
-                      {convertPart(element.types[0])} :
-                    </div>
-                    <div className="col-span-7">
-                      <input
-                        type="text"
-                        value={element?.long_name}
-                        className="focus:border hover:border hover:border-[#828282] border border-[#333333] w-[80%] bg-black font-['Poppins'] text-[16px] leading-[29px] pl-[25px]"
-                        placeholder=""
-                      ></input>
-                      <br />
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+            <div className="App"></div>
             {isChecked ? (
               <div
                 onClick={updateMessage}
