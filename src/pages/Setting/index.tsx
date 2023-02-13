@@ -1,18 +1,12 @@
 import { useEffect, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
-import {
-  CountryDropdown,
-  RegionDropdown,
-  CountryRegionData,
-} from "react-country-region-selector";
+import { CountryDropdown } from "react-country-region-selector";
 import axios from "axios";
 import { API_KEY, GOOGLE_KEY } from "../../utils/api.contant";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import { validateHeaderName } from "http";
 
 const Setting = () => {
-  const [shippingAddress, setShippingAddress] = useState("");
   const [isChecked, setIsChecked] = useState(false);
   const [inputAddress, setInputAddress] = useState("");
   const [ValidatedAddress, setValidatedAddress] = useState([]);
@@ -26,6 +20,10 @@ const Setting = () => {
 
   const { library, account } = useWeb3React();
 
+  useEffect(() => {
+    setValidatedAddress([]);
+    setFormatedAddress("");
+  }, [tabIndex]);
   useEffect(() => {
     const fetchData = async () => {
       try {
