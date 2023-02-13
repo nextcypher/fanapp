@@ -1,18 +1,25 @@
 import { useEffect, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
-import Autocomplete from "react-google-autocomplete";
+import {
+  CountryDropdown,
+  RegionDropdown,
+  CountryRegionData,
+} from "react-country-region-selector";
 import axios from "axios";
 import { API_KEY, GOOGLE_KEY } from "../../utils/api.contant";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-
-const address = "2566 Shallowford Rd NE Atlanta, GA 30345";
+import { validateHeaderName } from "http";
 
 const Setting = () => {
   const [shippingAddress, setShippingAddress] = useState("");
   const [isChecked, setIsChecked] = useState(false);
-  const [addressHeap, setAddressHeap] = useState([]);
-  const [interAddHeap, setInterAddHeap] = useState([]);
+  const [inputAddress, setInputAddress] = useState("");
+  const [ValidatedAddress, setValidatedAddress] = useState([]);
+  const [formatedAddress, setFormatedAddress] = useState("");
+  const [country, setCountry] = useState("");
+  const [tabIndex, setTabIndex] = useState(0);
+  const [countryCode, setCountryCode] = useState("");
   const [signature, setSignature] = useState("");
   const [signedMessage, setSignedMessage] = useState("");
   const [error, setError] = useState("");
@@ -20,9 +27,6 @@ const Setting = () => {
   const { library, account } = useWeb3React();
 
   useEffect(() => {
-    validateAddress(address).then((res) => {
-      console.log(res);
-    });
     const fetchData = async () => {
       try {
         if (account) {
@@ -42,41 +46,47 @@ const Setting = () => {
     fetchData();
   });
 
-  async function validateAddress1(address) {
-    const response = await axios.get(
-      `https://api.smartystreets.com/street-address?auth-id=YOUR_AUTH_ID&auth-token=YOUR_AUTH_TOKEN&street=${address}`
-    );
-    const data = response.data;
-
-    if (data.length > 0) {
-      return true;
-    } else {
-      return false;
+  const signMessage = async () => {
+    if (!library) return;
+    try {
+      const signature = await library.provider.request({
+        method: "personal_sign",
+        params: [formatedAddress, account],
+      });
+      setSignedMessage(formatedAddress);
+      setSignature(signature);
+      console.log(signature);
+      axios
+        .post(`${API_KEY}/address`, {
+          wallet: account,
+          signature: signature,
+          shipAddress: formatedAddress,
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    } catch (error) {
+      setError(error);
     }
-  }
+  };
 
-  async function validateAddress(address) {
-    const response = await axios.get(
-      `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${GOOGLE_KEY}`
-    );
-    const data = response.data;
-
-    if (data.status === "OK") {
-      console.log("data.result", data.results);
-      for (const result of data.results) {
-        if (result.formatted_address.includes(address)) {
-          return true;
-        }
-      }
-      return false;
-    } else {
-      return false;
-    }
-  }
   const convertPart = (str: string) => {
     switch (str) {
       case "postal_code":
         return "Zip Code";
+      case "street_number":
+        return "street_number";
+      case "route":
+        return "street 1";
+      case "subpremise":
+        return "street 2";
+      case "point_of_interest":
+        return "point_of_interest";
+      case "postal_code_suffix":
+        return "Zip Code Suffix";
       case "administrative_area_level_3":
         return "Township";
       case "administrative_area_level_2":
@@ -90,21 +100,21 @@ const Setting = () => {
     }
   };
 
-  const signMessage = async () => {
+  const updateMessage = async () => {
     if (!library) return;
     try {
       const signature = await library.provider.request({
         method: "personal_sign",
-        params: [shippingAddress, account],
+        params: [formatedAddress, account],
       });
-      setSignedMessage(shippingAddress);
+      setSignedMessage(formatedAddress);
       setSignature(signature);
       console.log(signature);
       axios
-        .post(`${API_KEY}/address`, {
+        .put(`${API_KEY}/address/${account}`, {
           wallet: account,
           signature: signature,
-          shipAddress: shippingAddress,
+          shipAddress: formatedAddress,
         })
         .then(function (response) {
           console.log(response);
@@ -117,32 +127,39 @@ const Setting = () => {
     }
   };
 
-  const updateMessage = async () => {
-    if (!library) return;
-    try {
-      const signature = await library.provider.request({
-        method: "personal_sign",
-        params: [shippingAddress, account],
-      });
-      setSignedMessage(shippingAddress);
-      setSignature(signature);
-      console.log(signature);
-      axios
-        .put(`${API_KEY}/address/${account}`, {
-          wallet: account,
-          signature: signature,
-          shipAddress: shippingAddress,
-        })
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    } catch (error) {
-      setError(error);
-    }
+  const ValidateUS = async () => {
+    const response = await axios.post(`${API_KEY}/validate`, {
+      addressLines: inputAddress,
+      regionCode: "US",
+    });
+    setValidatedAddress(response.data.address.addressComponents);
+    setFormatedAddress(response.data.address.formattedAddress);
   };
+
+  const ValidateGlobal = async () => {
+    const response = await axios.post(`${API_KEY}/validate`, {
+      addressLines: inputAddress,
+      regionCode: countryCode,
+    });
+    setValidatedAddress(response.data.address.addressComponents);
+    setFormatedAddress(response.data.address.formattedAddress);
+  };
+
+  const selectCountry = async (val) => {
+    setCountry(val);
+    setCountryCode(await getCountryCode(val));
+  };
+
+  async function getCountryCode(country) {
+    try {
+      const response = await axios.get(
+        `https://restcountries.com/v2/name/${country}?fullText=true`
+      );
+      return response.data[0].alpha2Code;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div className="flex flex-col md:w-[92%] w-full md:px-[100px] md:py-[50px] px-[20px] py-[30px] mx-auto bg-transparent">
@@ -150,13 +167,46 @@ const Setting = () => {
         <div className="font-['Ailerons'] text-[31px] leading-[34px] mb-[10px] text-center">
           Shipping Address
         </div>
-        <Tabs className="text-center text-gray-400 bg-transparent">
+        <Tabs
+          className="text-center text-gray-400 bg-transparent"
+          selectedIndex={tabIndex}
+          onSelect={(index) => setTabIndex(index)}
+        >
           <TabList>
             <Tab>Domestic US</Tab>
             <Tab>International</Tab>
           </TabList>
           <TabPanel className="ml-[50px]">
-            <div className="App"></div>
+            <div className="App flex justify-center items-center">
+              <input
+                type="text"
+                onChange={(e) => setInputAddress(e.target.value)}
+                className="focus:border focus:border-[#10CD00] hover:border hover:border-[#828282] border border-[#333333] w-[60%] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[20px] pl-[25px] py-[0px]"
+                placeholder=""
+              ></input>
+              <div
+                onClick={ValidateUS}
+                className="mx-auto cursor-pointer mt-[20px] w-[139px] font-['Ailerons'] text-[20px] leading-[30px] text-center border-2 border-[#252525] rounded-[10px] py-[10px] bg-black hover:bg-[#10CD00] hover:text-black"
+              >
+                Validate
+              </div>
+            </div>
+            {ValidatedAddress?.map((element, index) => (
+              <div className="grid grid-cols-10 mt-[10px]">
+                <div className="col-sapn-3 whitespace-nowrap mt-[10px] flex justify-end">
+                  {convertPart(element.componentType)} :
+                </div>
+                <div className="col-span-7">
+                  <input
+                    type="text"
+                    value={element?.componentName?.text}
+                    className="focus:border hover:border hover:border-[#828282] border border-[#333333] w-[80%] bg-black font-['Poppins'] text-[16px] leading-[29px] pl-[25px]"
+                    placeholder=""
+                  ></input>
+                  <br />
+                </div>
+              </div>
+            ))}
             {isChecked ? (
               <div
                 onClick={updateMessage}
@@ -174,7 +224,44 @@ const Setting = () => {
             )}
           </TabPanel>
           <TabPanel className="ml-[50px]">
-            <div className="App"></div>
+            <div className="App flex justify-center items-center">
+              <input
+                type="text"
+                onChange={(e) => setInputAddress(e.target.value)}
+                className="focus:border focus:border-[#10CD00] hover:border hover:border-[#828282] border border-[#333333] w-[60%] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[20px] pl-[25px] py-[0px]"
+                placeholder=""
+              ></input>
+              <div className="mx-[10px] w-[30%]">
+                <CountryDropdown
+                  value={country}
+                  onChange={(val) => selectCountry(val)}
+                  defaultOptionLabel="Country"
+                  classes="w-[60%] mt-[20px] h-[54px] bg-black"
+                />
+              </div>
+              <div
+                onClick={ValidateGlobal}
+                className="mx-auto cursor-pointer mt-[20px] w-[139px] font-['Ailerons'] text-[20px] leading-[30px] text-center border-2 border-[#252525] rounded-[10px] py-[10px] bg-black hover:bg-[#10CD00] hover:text-black"
+              >
+                Validate
+              </div>
+            </div>
+            {ValidatedAddress?.map((element, index) => (
+              <div className="grid grid-cols-10 mt-[10px]">
+                <div className="col-sapn-3 whitespace-nowrap mt-[10px] flex justify-end">
+                  {convertPart(element.componentType)} :
+                </div>
+                <div className="col-span-7">
+                  <input
+                    type="text"
+                    value={element?.componentName?.text}
+                    className="focus:border hover:border hover:border-[#828282] border border-[#333333] w-[80%] bg-black font-['Poppins'] text-[16px] leading-[29px] pl-[25px]"
+                    placeholder=""
+                  ></input>
+                  <br />
+                </div>
+              </div>
+            ))}
             {isChecked ? (
               <div
                 onClick={updateMessage}
