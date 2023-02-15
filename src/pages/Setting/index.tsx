@@ -23,6 +23,7 @@ const Setting = () => {
   useEffect(() => {
     setValidatedAddress([]);
     setFormatedAddress("");
+    getGeoInfo()
   }, [tabIndex]);
   useEffect(() => {
     const fetchData = async () => {
@@ -159,6 +160,12 @@ const Setting = () => {
     }
   }
 
+const getGeoInfo = async()=>{
+  const res = await axios.get('https://geolocation-db.com/json/')
+  console.log(res.data);
+  setCountry(res.data.country_name)
+}
+
   return (
     <div className="flex flex-col md:w-[92%] w-full md:px-[100px] md:py-[50px] px-[20px] py-[30px] mx-auto bg-transparent">
       <div className="bg-black border gap-[30px] text-[#F2F2F2] border-[#252525] mx-auto md:m-0 md:w-[80%] fit w-[80%] rounded-[30px] px-[30px] py-[40px]">
@@ -233,7 +240,7 @@ const Setting = () => {
                 <CountryDropdown
                   value={country}
                   onChange={(val) => selectCountry(val)}
-                  defaultOptionLabel="Country"
+                  defaultOptionLabel={country}
                   classes="w-[60%] mt-[20px] h-[54px] bg-black"
                 />
               </div>

@@ -1,20 +1,18 @@
-// import toast from "react-hot-toast"
-// import { BigNumber } from "ethers";
-import { useEffect, useState } from "react";
-// import { formatEther } from '@ethersproject/units'
+import { useEffect, useState, useCallback } from "react";
 import Modal from "react-modal";
 import { Link } from "react-router-dom";
 import { useWeb3React } from "@web3-react/core";
 import toast, { Toaster } from "react-hot-toast";
-import { Menu, MenuItem, MenuButton, SubMenu } from "@szhsin/react-menu";
+import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
+import { ethers } from "ethers";
 import { connectors } from "./connectors";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { truncateAddress } from "./utils";
+import { INFURA_API_KEY, INFURA_URL } from "utils/api.contant";
 import Metamask from "../../assets/images/metamask.png";
 import Coinbase from "../../assets/images/coinbaseWalletIcon.svg";
 import Wallet from "../../assets/images/walletConnectIcon.svg";
-import { CgProfile } from "react-icons/cg";
 import { IoMdSettings } from "react-icons/io";
 import { BiLogOut } from "react-icons/bi";
 import { FaUserAlt } from "react-icons/fa";
@@ -39,22 +37,30 @@ Modal.setAppElement("#root");
 
 const ConnectWallet = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [ensName, setEnsName] = useState("");
+  const URL = INFURA_URL + INFURA_API_KEY;
 
   const { library, chainId, account, activate, deactivate, active } =
     useWeb3React();
 
   const network = 97;
   useEffect(() => {
+
+    resolveName();
     if (account) {
       library?.getBalance(account).then((result) => {
-        // setBalances(parseFloat(formatEther(BigNumber.from(result))))
       });
     } else {
-      // toast('Please connect the wallet!', {
-      //   icon: '⚠️',
-      // });
     }
   }, [account, library]);
+
+  const resolveName = async () => {
+    const provider = new ethers.providers.JsonRpcProvider(URL);
+    const response = await provider.lookupAddress(account);
+    console.log('ens', response);
+    setEnsName(response);
+    return;
+  }
 
   useEffect(() => {
     const provider = window.localStorage.getItem("provider");
@@ -64,10 +70,6 @@ const ConnectWallet = () => {
   function closeModal() {
     setIsOpen(false);
   }
-  // const copy = (value) => {
-  //   navigator.clipboard.writeText(value);
-  //   toast.success("Copied!");
-  // };
 
   const refreshState = () => {
     window.localStorage.setItem("provider", undefined);
@@ -89,16 +91,7 @@ const ConnectWallet = () => {
   const setProvider = (type) => {
     window.localStorage.setItem("provider", type);
   };
-  // const switchNetwork = async () => {
-  //   try {
-  //     await library.provider.request({
-  //       method: "wallet_switchEthereumChain",
-  //       params: [{ chainId: toHex(network) }]
-  //     });
-  //   } catch (switchError) {
-  //     console.log(switchError)
-  //   }
-  // };
+
   const selectWallet = (key) => {
     switch (key) {
       case 0: {
@@ -123,6 +116,7 @@ const ConnectWallet = () => {
         break;
     }
   };
+
   useEffect(() => {
     if (library && chainId !== network) {
       // switchNetwork()
@@ -163,14 +157,15 @@ const ConnectWallet = () => {
             <Menu
               menuButton={
                 <MenuButton>
-                  <button className="font-['Ailerons'] text-[20px] leading-[30px] bg-black hover:bg-white/10 duration-100 border-2 border-[#252525] px-[30px] py-[15px] rounded-[70px]">
-                    {truncateAddress(account)}{" "}
+                  <button className="text-[20px] leading-[30px] bg-black hover:bg-white/10 duration-100 border-2 border-[#252525] px-[30px] py-[15px] rounded-[70px] lowercase">
+                    {
+                      ensName ? ensName : truncateAddress(account)
+                    } {" "}
                     <FontAwesomeIcon icon={faArrowRightFromBracket} />
                   </button>
                 </MenuButton>
               }
             >
-              {/* <Link to={"./dashboard"}><div className="hover:text-[#10CD00]">DASHBOARD</div></Link> */}
               <div className="flex flex-col justify-between bg-black border border-[#252525] w-[250px] h-auto rounded-[10px] p-[30px] ml-[20px]">
                 <MenuItem className="text-[20px] text-gray-300">
                   <Link to={"./profile"}>

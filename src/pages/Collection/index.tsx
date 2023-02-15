@@ -13,7 +13,6 @@ function Collection() {
   //   const { library, account } = useWeb3React();
   const [nfts, setNFTs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [address, setAddress] = useState("");
   const fetchURL = `${baseURL + ALCHEMY_API_KEY}/getNFTs/?owner=${account}`;
   const options = {
     method: "GET",
@@ -43,13 +42,16 @@ function Collection() {
     if (account) {
       console.log("wallet", account);
     }
+  });
+
+  useEffect(() => {
     fetchCollection();
-  }, [address]);
+  }, [account]);
 
   return (
     <div>
       <div className="bg-black border gap-[30px] text-[#F2F2F2] text-[18px] border-[#252525] mx-auto md:my-[20px] md:w-[40%] fit w-[40%] rounded-[10px] px-[30px] py-[20px]">
-        My Collections...
+        My Collections
       </div>
       <div className="container mx-auto">
         {!isLoading && nfts.length === 0 && (
