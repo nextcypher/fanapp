@@ -59,7 +59,7 @@ function Collection() {
             No Collection Found
           </h1>
         )}
-        <div className="grid grid-cols-5 gap-4">
+        <div className="grid grid-cols-10 gap-4">
           {nfts.map((token) => (
             <NFTCard key={token.name} nft={token} />
           ))}
