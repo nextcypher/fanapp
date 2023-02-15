@@ -78,11 +78,11 @@ const Home = () => {
         {!isLoading && nfts.length === 0 && (
           <div ref={sliderRef} className="keen-slider">
             <div className="keen-slider__slide number-slide1">
-              <img src={slide1} />
+              <img src={slide1} alt="slide1" />
               <p>Looking Glass</p>
             </div>
             <div className="keen-slider__slide number-slide2">
-              <img src={slide2} />
+              <img src={slide2} alt="slide2" />
             </div>
           </div>
         )}
