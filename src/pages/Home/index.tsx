@@ -69,11 +69,6 @@ const Home = () => {
   });
   return (
     <div className="flex flex-col md:w-[92%] w-full md:px-[100px] md:py-[50px] px-[20px] py-[30px] mx-auto bg-transparent">
-      <Link to="/collection" className="max-w-max">
-        <button className="bg-black text-[#F2F2F2] text-[18px] w-[200px] rounded-[70px] px-[30px] py-[20px] cursor-pointer hover:bg-white/10 duration-100 border-2 border-[#252525]">
-          My Collections...
-        </button>
-      </Link>
       <div className="container mx-auto mt-[20px]">
         {!isLoading && nfts.length === 0 && (
           <div ref={sliderRef} className="keen-slider">
@@ -86,6 +81,11 @@ const Home = () => {
             </div>
           </div>
         )}
+        <Link to="/collection" className="max-w-max">
+          <button className="bg-black text-[#F2F2F2] text-[18px] w-[200px] rounded-[70px] px-[30px] py-[20px] cursor-pointer hover:bg-white/10 duration-100 border-2 border-[#252525]">
+            My Collections...
+          </button>
+        </Link>
         <div className="grid grid-cols-4 gap-4">
           {nfts.map((token) => (
             <NFTCard key={token.name} nft={token} />
