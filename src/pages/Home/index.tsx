@@ -11,8 +11,6 @@ import {
 } from "../../utils/api.contant";
 import NFTCard from "../../components/NFTCard";
 import "keen-slider/keen-slider.min.css";
-import slide1 from "../../assets/images/looking_bg-1.jpg";
-import slide2 from "../../assets/images/slider_bg-2.jpg";
 
 const account = "0x6FBb4B4Fa983B223bceEfC4AEbD543BB94745cF9";
 const Home = () => {
@@ -69,29 +67,20 @@ const Home = () => {
   });
   return (
     <div className="flex flex-col md:w-[92%] w-full md:px-[100px] md:py-[50px] px-[20px] py-[30px] mx-auto bg-transparent">
-      <div className="container mx-auto mt-[20px]">
-        {nfts.length === 0 && (
-          <div ref={sliderRef} className="keen-slider">
-            <div className="keen-slider__slide number-slide1">
-              <img src={slide1} alt="slide1" />
-              <p>Looking Glass</p>
-            </div>
-            <div className="keen-slider__slide number-slide2">
-              <img src={slide2} alt="slide2" />
-            </div>
+      <div className="mx-auto mt-[20px] foreground">
+        <div className="ml-[30%] mt-[10%]">
+          <div className="grid grid-cols-8 grid-flow-col gap-[10px]">
+            {nfts.map((token) => (
+              <NFTCard key={token.name} nft={token} flag={false} />
+            ))}
           </div>
-        )}
-        {nfts.length !== 0 && (
-          <Link to="/collection" className="max-w-max">
-            <button className="bg-black text-[#F2F2F2] text-[18px] w-[200px] rounded-[70px] px-[30px] py-[20px] cursor-pointer hover:bg-white/10 duration-100 border-2 border-[#252525]">
-              My Collections...
-            </button>
-          </Link>
-        )}
-        <div className="grid grid-cols-8 gap-4 mt-[20px]">
-          {nfts.map((token) => (
-            <NFTCard key={token.name} nft={token} />
-          ))}
+          {nfts.length !== 0 && (
+            <Link to="/collection" className="max-w-max">
+              <button className="bg-black text-[#F2F2F2] text-[18px] w-[200px] rounded-[70px] px-[30px] py-[20px] cursor-pointer hover:bg-white/10 duration-100 border-2 border-[#252525]">
+                My Collections...
+              </button>
+            </Link>
+          )}
         </div>
       </div>
     </div>

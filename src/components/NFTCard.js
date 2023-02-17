@@ -1,12 +1,15 @@
 import React from "react";
 
-const NFTCard = ({ nft }) => {
+const NFTCard = ({ nft, flag = true }) => {
   return (
     <div className="max-w-lg rounded overflow-hidden shadow-lg">
       <img src={nft.image} alt="" className="w-full" />
-      <div className="px-4 py-4">
-        <div className="font-bold text-teal-600 text-xl mb-2">{nft.name}</div>
-      </div>
+      {flag && (
+        <div className="px-4 py-4">
+          <div className="font-bold text-teal-600 text-xl mb-2">{nft.name}</div>
+        </div>
+      )}
+
       <div className="px-6 py-4">
         {nft.traits?.map((trait, index) => (
           <span
