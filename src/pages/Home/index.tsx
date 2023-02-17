@@ -68,7 +68,7 @@ const Home = () => {
   return (
     <div className="flex flex-col md:w-[92%] w-full md:px-[100px] md:py-[50px] px-[20px] py-[30px] mx-auto bg-transparent">
       <div className="mx-auto mt-[20px] foreground">
-        <div className="ml-[30%] mt-[10%]">
+        <div className="ml-[35%] mt-[15%]">
           <div className="grid grid-cols-8 grid-flow-col gap-[10px]">
             {nfts.map((token) => (
               <NFTCard key={token.name} nft={token} flag={false} />
