@@ -17,7 +17,7 @@ const Profile = () => {
           axios
             .get(`${API_KEY}/address/${account}`)
             .then(function (response) {
-              setShipAddress(response.data.targetAddress.shipAddress);
+              setShipAddress(response.data.data.shipAddress);
               console.log(response);
             })
             .catch(function (error) {
