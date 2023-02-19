@@ -5,11 +5,20 @@ import { useWeb3React } from "@web3-react/core";
 import toast, { Toaster } from "react-hot-toast";
 import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
 import { ethers } from "ethers";
+import axios from "axios";
+// import { json2csv } from "json-2-csv";
+// import { parseAsync } from "json2csv/lib/json2csv";
+import json2csv from "json2csv";
 import { connectors } from "./connectors";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { truncateAddress } from "./utils";
-import { INFURA_API_KEY, INFURA_URL } from "utils/api.contant";
+import {
+  INFURA_API_KEY,
+  INFURA_URL,
+  ADMIN_WALLET,
+  API_KEY,
+} from "utils/api.contant";
 import Metamask from "../../assets/images/metamask.png";
 import Coinbase from "../../assets/images/coinbaseWalletIcon.svg";
 import Wallet from "../../assets/images/walletConnectIcon.svg";
@@ -17,6 +26,7 @@ import { IoMdSettings } from "react-icons/io";
 import { BiLogOut } from "react-icons/bi";
 import { FaUserAlt } from "react-icons/fa";
 import { BsGridFill } from "react-icons/bs";
+import { FaFileDownload } from "react-icons/fa";
 
 const customStyles = {
   content: {
@@ -45,11 +55,11 @@ const ConnectWallet = () => {
 
   const network = 97;
   useEffect(() => {
-
+    console.log("account", account);
+    console.log("Admin", ADMIN_WALLET);
     resolveName();
     if (account) {
-      library?.getBalance(account).then((result) => {
-      });
+      library?.getBalance(account).then((result) => {});
     } else {
     }
   }, [account, library]);
@@ -57,10 +67,10 @@ const ConnectWallet = () => {
   const resolveName = async () => {
     const provider = new ethers.providers.JsonRpcProvider(URL);
     const response = await provider.lookupAddress(account);
-    console.log('ens', response);
+    console.log("ens", response);
     setEnsName(response);
     return;
-  }
+  };
 
   useEffect(() => {
     const provider = window.localStorage.getItem("provider");
@@ -123,6 +133,28 @@ const ConnectWallet = () => {
     }
   }, [library, chainId]);
 
+  const csvDownload = async () => {
+    try {
+      if (account) {
+        const body = await axios.get(`${API_KEY}/address/`);
+        console.log("body", body.data.addressData);
+        const csv = json2csv.parse(body.data.addressData);
+
+        // Create a downloadable link for the CSV file
+        const csvData =
+          "data:text/csv;charset=utf-8," + encodeURIComponent(csv);
+        const downloadLink = document.createElement("a");
+        downloadLink.href = csvData;
+        downloadLink.download = "my-data.csv";
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       {/* home title and sub title */}
@@ -158,9 +190,7 @@ const ConnectWallet = () => {
               menuButton={
                 <MenuButton>
                   <button className="text-[20px] leading-[30px] bg-black hover:bg-white/10 duration-100 border-2 border-[#252525] px-[30px] py-[15px] rounded-[70px] lowercase">
-                    {
-                      ensName ? ensName : truncateAddress(account)
-                    } {" "}
+                    {ensName ? ensName : truncateAddress(account)}{" "}
                     <FontAwesomeIcon icon={faArrowRightFromBracket} />
                   </button>
                 </MenuButton>
@@ -194,6 +224,17 @@ const ConnectWallet = () => {
                     </div>
                   </Link>
                 </MenuItem>
+                {account === ADMIN_WALLET && (
+                  <MenuItem className="text-[20px] text-gray-300 pt-[13px]">
+                    <div
+                      onClick={csvDownload}
+                      className="hover:opacity-80 duration-100"
+                    >
+                      <FaFileDownload className="inline mr-[10px]" size={30} />
+                      CSV Download
+                    </div>
+                  </MenuItem>
+                )}
                 <MenuItem className="text-[20px] text-gray-300 pt-[13px]">
                   <Link to={"./"}>
                     <div

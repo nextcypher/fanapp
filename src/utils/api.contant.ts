@@ -5,3 +5,4 @@ export const ALCHEMY_API_KEY = process.env.REACT_APP_ALCHEMY_API_KEY;
 export const baseURL = process.env.REACT_APP_BASEURL;
 export const INFURA_URL = process.env.REACT_APP_INFURA_URL;
 export const INFURA_API_KEY = process.env.REACT_APP_INFURA_API_KEY;
+export const ADMIN_WALLET = process.env.REACT_APP_ADMIN_WALLET;

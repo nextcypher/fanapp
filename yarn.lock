@@ -2242,6 +2242,11 @@
     "superstruct" "^0.14.2"
     "tweetnacl" "^1.0.3"
 
+"@streamparser/json@^0.0.6":
+  "integrity" "sha512-vL9EVn/v+OhZ+Wcs6O4iKE9EUpwHUqHmCtNUMWjqp+6dr85+XPOSGTEsqYNq1Vn04uk9SWlOVmx9J48ggJVT2Q=="
+  "resolved" "https://registry.npmjs.org/@streamparser/json/-/json-0.0.6.tgz"
+  "version" "0.0.6"
+
 "@surma/rollup-plugin-off-main-thread@^2.2.3":
   "integrity" "sha512-lR8q/9W7hZpMWweNiAKU7NQerBnzQQLvi8qnTDU/fxItPhtZVMbPV3lbCwjhIlNBe9Bbr5V+KHshvWmVSG9cxQ=="
   "resolved" "https://registry.npmjs.org/@surma/rollup-plugin-off-main-thread/-/rollup-plugin-off-main-thread-2.2.3.tgz"
@@ -5039,6 +5044,11 @@
   "resolved" "https://registry.npmjs.org/commander/-/commander-2.20.3.tgz"
   "version" "2.20.3"
 
+"commander@^6.2.0":
+  "integrity" "sha512-U7VdrJFnJgo4xjrHpTzu0yrHPGImdsmD95ZlgYSEajAn2JKzDhDTPG9kBTefmObL2w/ngeZnilk+OV9CG3d7UA=="
+  "resolved" "https://registry.npmjs.org/commander/-/commander-6.2.1.tgz"
+  "version" "6.2.1"
+
 "commander@^7.2.0":
   "integrity" "sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw=="
   "resolved" "https://registry.npmjs.org/commander/-/commander-7.2.0.tgz"
@@ -5645,6 +5655,11 @@
   "resolved" "https://registry.npmjs.org/dedent/-/dedent-0.7.0.tgz"
   "version" "0.7.0"
 
+"deeks@2.6.0":
+  "integrity" "sha512-zu/g4fVjPreYuP11f3o5W7TeSRscpnn9LQO15lxIXu66MwOopIxj4jhLDEGMW7JkZYqWEz5JG3qs88kHNMY08g=="
+  "resolved" "https://registry.npmjs.org/deeks/-/deeks-2.6.0.tgz"
+  "version" "2.6.0"
+
 "deep-equal@^2.0.5":
   "integrity" "sha512-nPiRgmbAtm1a3JsnLCf6/SLfXcjyN5v8L1TXzdCmHrXJ4hx+gW/w1YCcn7z8gJtSiDArZCgYtbao3QqLm/N1Sw=="
   "resolved" "https://registry.npmjs.org/deep-equal/-/deep-equal-2.0.5.tgz"
@@ -5862,6 +5877,11 @@
   "version" "5.4.0"
   dependencies:
     "@leichtgewicht/ip-codec" "^2.0.1"
+
+"doc-path@3.0.6":
+  "integrity" "sha512-fUNXXk+4MbfKkXec41cIyD5DTPISVD0MzMPWX2qz+kL7otFtQRHCkyPaD8qmLyQpfYQWye/z7oXeeD0nQp8HYQ=="
+  "resolved" "https://registry.npmjs.org/doc-path/-/doc-path-3.0.6.tgz"
+  "version" "3.0.6"
 
 "doctrine@^2.1.0":
   "integrity" "sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw=="
@@ -9330,6 +9350,14 @@
   "resolved" "https://registry.npmjs.org/jsesc/-/jsesc-0.5.0.tgz"
   "version" "0.5.0"
 
+"json-2-csv@^3.18.0":
+  "integrity" "sha512-+1lxMDaIx71QWVaENrphLb+o9xUY34nxVW6dKiRzFM2YYyxFbIkKNn4J3oVEOn/xxNtkmg8XVGmpZT+wIoi5xw=="
+  "resolved" "https://registry.npmjs.org/json-2-csv/-/json-2-csv-3.18.0.tgz"
+  "version" "3.18.0"
+  dependencies:
+    "deeks" "2.6.0"
+    "doc-path" "3.0.6"
+
 "json-buffer@3.0.1":
   "integrity" "sha512-4bV5BfR2mqfQTJm+V5tPPdf+ZpuhiIvTuAB5g8kcrXOZpTT/QwwVRWBywX1ozr6lEuPdbHxwaJlm9G6mI2sfSQ=="
   "resolved" "https://registry.npmjs.org/json-buffer/-/json-buffer-3.0.1.tgz"
@@ -9397,6 +9425,15 @@
   "integrity" "sha512-qzEpz1SDUb9xvA+LDOkNgjekdV7tuC7zDQf14sqMBtujh8kVbQhF11VWm4DeR99yFNjVSjTTfKa40c9ZQOtwXA=="
   "resolved" "https://registry.npmjs.org/json-stringify-safe/-/json-stringify-safe-4.0.0.tgz"
   "version" "4.0.0"
+
+"json2csv@^6.0.0-alpha.2":
+  "integrity" "sha512-nJ3oP6QxN8z69IT1HmrJdfVxhU1kLTBVgMfRnNZc37YEY+jZ4nU27rBGxT4vaqM/KUCavLRhntmTuBFqZLBUcA=="
+  "resolved" "https://registry.npmjs.org/json2csv/-/json2csv-6.0.0-alpha.2.tgz"
+  "version" "6.0.0-alpha.2"
+  dependencies:
+    "@streamparser/json" "^0.0.6"
+    "commander" "^6.2.0"
+    "lodash.get" "^4.4.2"
 
 "json5@^1.0.1":
   "integrity" "sha512-aKS4WQjPenRxiQsC93MNfjx+nbF4PAdYzmd/1JIj8HYzqfbu86beTuNgXDzPknWk0n0uARlyewZo4s++ES36Ow=="
@@ -9609,6 +9646,11 @@
   "integrity" "sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow=="
   "resolved" "https://registry.npmjs.org/lodash.debounce/-/lodash.debounce-4.0.8.tgz"
   "version" "4.0.8"
+
+"lodash.get@^4.4.2":
+  "integrity" "sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ=="
+  "resolved" "https://registry.npmjs.org/lodash.get/-/lodash.get-4.4.2.tgz"
+  "version" "4.4.2"
 
 "lodash.memoize@^4.1.2":
   "integrity" "sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag=="

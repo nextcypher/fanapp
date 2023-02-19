@@ -12,9 +12,9 @@ import {
 import NFTCard from "../../components/NFTCard";
 import "keen-slider/keen-slider.min.css";
 
-const account = "0x6FBb4B4Fa983B223bceEfC4AEbD543BB94745cF9";
+// const account = "0x6FBb4B4Fa983B223bceEfC4AEbD543BB94745cF9";
 const Home = () => {
-  // const { account } = useWeb3React();
+  const { account } = useWeb3React();
   const [nfts, setNFTs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const fetchURL = `${baseURL + ALCHEMY_API_KEY}/getNFTs/?owner=${account}`;
@@ -68,7 +68,7 @@ const Home = () => {
   return (
     <div className="flex flex-col md:w-[92%] w-full md:px-[100px] md:py-[50px] px-[20px] py-[30px] mx-auto bg-transparent">
       <div className="mx-auto mt-[20px] foreground">
-        <div className="ml-[35%] mt-[15%]">
+        <div className="ml-[15%] mt-[15%]">
           <div className="grid grid-cols-8 grid-flow-col gap-[10px]">
             {nfts.map((token) => (
               <NFTCard key={token.name} nft={token} flag={false} />
