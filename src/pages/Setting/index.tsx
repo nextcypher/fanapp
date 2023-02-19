@@ -23,7 +23,7 @@ const Setting = () => {
   useEffect(() => {
     setValidatedAddress([]);
     setFormatedAddress("");
-    getGeoInfo()
+    getGeoInfo();
   }, [tabIndex]);
   useEffect(() => {
     const fetchData = async () => {
@@ -160,15 +160,15 @@ const Setting = () => {
     }
   }
 
-const getGeoInfo = async()=>{
-  const res = await axios.get('https://geolocation-db.com/json/')
-  console.log(res.data);
-  setCountry(res.data.country_name)
-}
+  const getGeoInfo = async () => {
+    const res = await axios.get("https://geolocation-db.com/json/");
+    console.log(res.data);
+    setCountry(res.data.country_name);
+  };
 
   return (
     <div className="flex flex-col md:w-[92%] w-full md:px-[100px] md:py-[50px] px-[20px] py-[30px] mx-auto bg-transparent">
-      <div className="bg-black border gap-[30px] text-[#F2F2F2] border-[#252525] mx-auto md:m-0 md:w-[80%] fit w-[80%] rounded-[30px] px-[30px] py-[40px]">
+      <div className="bg-black border gap-[30px] text-[#F2F2F2] border-[#252525] mx-auto md:m-0 md:w-[80%] fit w-[90%] rounded-[30px] px-[30px] py-[40px]">
         <div className="font-['Ailerons'] text-[31px] leading-[34px] mb-[10px] text-center">
           Shipping Address
         </div>
@@ -181,17 +181,17 @@ const getGeoInfo = async()=>{
             <Tab>Domestic US</Tab>
             <Tab>International</Tab>
           </TabList>
-          <TabPanel className="ml-[50px]">
-            <div className="App flex justify-center items-center">
+          <TabPanel className="">
+            <div className="App flex flex-col md:flex-row justify-between items-center">
               <input
                 type="text"
                 onChange={(e) => setInputAddress(e.target.value)}
-                className="focus:border focus:border-[#10CD00] hover:border hover:border-[#828282] border border-[#333333] w-[60%] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[20px] pl-[25px] py-[0px]"
+                className="focus:border focus:border-[#10CD00] hover:border hover:border-[#828282] border border-[#333333] md:w-[60%] w-[100%] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[20px] pl-[25px] py-[0px]"
                 placeholder=""
               ></input>
               <div
                 onClick={ValidateUS}
-                className="mx-auto cursor-pointer mt-[20px] w-[139px] font-['Ailerons'] text-[20px] leading-[30px] text-center border-2 border-[#252525] rounded-[10px] py-[10px] bg-black hover:bg-[#10CD00] hover:text-black"
+                className="cursor-pointer mt-[20px] w-[139px] font-['Ailerons'] text-[20px] leading-[30px] text-center border-2 border-[#252525] rounded-[10px] py-[10px] bg-black hover:bg-[#10CD00] hover:text-black"
               >
                 Validate
               </div>
@@ -228,15 +228,15 @@ const getGeoInfo = async()=>{
               </div>
             )}
           </TabPanel>
-          <TabPanel className="ml-[50px]">
-            <div className="App flex justify-center items-center">
+          <TabPanel className="">
+            <div className="App flex flex-col md:flex-row justify-between items-center">
               <input
                 type="text"
                 onChange={(e) => setInputAddress(e.target.value)}
-                className="focus:border focus:border-[#10CD00] hover:border hover:border-[#828282] border border-[#333333] w-[60%] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[20px] pl-[25px] py-[0px]"
+                className="focus:border focus:border-[#10CD00] hover:border hover:border-[#828282] border border-[#333333] md:w-[60%] w-[100%] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[20px] pl-[25px] py-[0px]"
                 placeholder=""
               ></input>
-              <div className="mx-[10px] w-[30%]">
+              <div className="mx-[10px] md:w-[30%] w-[100%]">
                 <CountryDropdown
                   value={country}
                   onChange={(val) => selectCountry(val)}

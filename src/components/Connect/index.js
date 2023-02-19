@@ -189,7 +189,7 @@ const ConnectWallet = () => {
             <Menu
               menuButton={
                 <MenuButton>
-                  <button className="text-[20px] leading-[30px] bg-black hover:bg-white/10 duration-100 border-2 border-[#252525] px-[30px] py-[15px] rounded-[70px] lowercase">
+                  <button className="md:text-[20px] text-[12px] leading-[30px] bg-black hover:bg-white/10 duration-100 border-2 border-[#252525] md:px-[30px] md:py-[15px] p-[12px] rounded-[70px] lowercase">
                     {ensName ? ensName : truncateAddress(account)}{" "}
                     <FontAwesomeIcon icon={faArrowRightFromBracket} />
                   </button>

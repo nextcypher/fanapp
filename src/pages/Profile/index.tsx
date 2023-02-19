@@ -47,7 +47,7 @@ const Profile = () => {
             </span>
             <span className="text-gray-400">Joined Febrary 2023</span>
           </div>
-          <div className="bg-black border gap-[30px] text-[#F2F2F2] border-[#252525] mx-auto md:m-0 md:w-[800px] fit w-[500px] rounded-[30px] px-[30px] py-[40px]">
+          <div className="bg-black border gap-[30px] text-[#F2F2F2] border-[#252525] mx-auto md:m-0 md:w-[800px] fit w-[80%] rounded-[30px] px-[30px] py-[40px]">
             <div className="font-['Ailerons'] text-[31px] leading-[34px] mt-[10px]">
               Shipping Address
             </div>
