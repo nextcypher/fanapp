@@ -95,13 +95,18 @@ body::-webkit-scrollbar-thumb:hover {
 
 .foreground {
   background-image: url("./assets/images/looking_bg-1.jpg");
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 10%;
-  left: 10%;
+  width: 90%;
+  height: 500px;
+}
+
+.foreground1 {
+  background-image: url("./assets/images/slider_bg-2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 90%;
+  height: 500px;
 }
 
 body {

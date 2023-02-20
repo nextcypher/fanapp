@@ -24,6 +24,7 @@
     "browserify-zlib": "^0.2.0",
     "ethereum-ens": "^0.8.0",
     "ethers": "^5.7.2",
+    "file-saver": "^2.0.5",
     "json-2-csv": "^3.18.0",
     "json2csv": "^6.0.0-alpha.2",
     "keen-slider": "^6.8.5",
