@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import { ethers } from "ethers";
 import axios from "axios";
 import { useWeb3React } from "@web3-react/core";
 import { useKeenSlider } from "keen-slider/react";
-import { saveAs } from "file-saver";
 import { Link } from "react-router-dom";
 import {
   baseURL,
@@ -21,7 +19,6 @@ const Home = () => {
   const { account } = useWeb3React();
   const [nfts, setNFTs] = useState([]);
   const [password, setPassword] = useState("");
-  const [pdf, setPdf] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const fetchURL = `${baseURL + ALCHEMY_API_KEY}/getNFTs/?owner=${account}`;
@@ -102,9 +99,6 @@ const Home = () => {
         a.remove();
         window.URL.revokeObjectURL(url);
       });
-
-    // const blob = new Blob([pdf], { type: "application/zip" });
-    // saveAs(blob, "Looking Glass");
   };
   return (
     <div className="flex flex-col md:w-[92%] w-full md:px-[100px] md:py-[50px] px-[20px] py-[30px] mx-auto bg-transparent">
