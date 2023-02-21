@@ -69,7 +69,7 @@ const Home = () => {
             .get(`${API_KEY}/pdf`)
             .then(function (response) {
               setPassword(response?.data.password);
-              setPdf(response?.data.pdf);
+              // setPdf(response?.data.pdf);
               console.log("response", response);
             })
             .catch(function (error) {
@@ -84,8 +84,27 @@ const Home = () => {
   }, [account]);
 
   const download = () => {
-    const blob = new Blob([pdf], { type: "application/zip" });
-    saveAs(blob, "Looking Glass");
+    const filename = "example.zip";
+    fetch(`${API_KEY}/pdf/download`, {
+      headers: {
+        "Content-Type": "application/zip",
+      },
+      method: "GET",
+    })
+      .then((response) => response.blob())
+      .then((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+      });
+
+    // const blob = new Blob([pdf], { type: "application/zip" });
+    // saveAs(blob, "Looking Glass");
   };
   return (
     <div className="flex flex-col md:w-[92%] w-full md:px-[100px] md:py-[50px] px-[20px] py-[30px] mx-auto bg-transparent">
@@ -118,7 +137,7 @@ const Home = () => {
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
-                  className="focus:border focus:border-[#84dd1f] hover:border hover:border-[#828282] border border-[#333333] w-[100%] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[20px] pl-[25px] py-[0px] inline"
+                  className="focus:border focus:border-[#84dd1f] hover:border hover:border-[#828282] border border-[#333333] w-[100%] md:w-[300px] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[20px] pl-[25px] py-[0px] inline"
                   value={password}
                   placeholder=""
                 ></input>
