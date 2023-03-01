@@ -1,27 +1,30 @@
 import { useEffect, useState } from "react";
+import { ethers } from "ethers";
 import axios from "axios";
 import { useWeb3React } from "@web3-react/core";
 import { useKeenSlider } from "keen-slider/react";
+import { saveAs } from "file-saver";
 import { Link } from "react-router-dom";
 import {
   baseURL,
   CONTRACT_ADDRESS,
   ALCHEMY_API_KEY,
-  API_KEY,
+  PDF_PASSWORD,
 } from "../../utils/api.contant";
 import pdfImage from "../../assets/images/pdf.png";
-import NFTCard from "../../components/NFTCard";
+import NFTCardClaim from "../../components/NFTCardClaim";
 import "keen-slider/keen-slider.min.css";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
-// const account = "0x6FBb4B4Fa983B223bceEfC4AEbD543BB94745cF9";
+const account = "0x6FBb4B4Fa983B223bceEfC4AEbD543BB94745cF9";
 const Home = () => {
-  const { account } = useWeb3React();
+  // const { account } = useWeb3React();
   const [nfts, setNFTs] = useState([]);
-  const [password, setPassword] = useState("");
+  const [pdf, setPdf] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const fetchURL = `${baseURL + ALCHEMY_API_KEY}/getNFTs/?owner=${account}`;
+  console.log("password", PDF_PASSWORD);
   const options = {
     method: "GET",
     url: fetchURL,
@@ -49,7 +52,6 @@ const Home = () => {
         console.error(error);
       });
     await new Promise((r) => setTimeout(r, 5000));
-    console.log("itemArray", itemArray);
     setNFTs(itemArray.slice(0, itemArray.length > 4 ? 4 : itemArray.length));
     setIsLoading(true);
   };
@@ -58,55 +60,20 @@ const Home = () => {
     fetchCollection();
   }, [account]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (account) {
-          axios
-            .get(`${API_KEY}/pdf`)
-            .then(function (response) {
-              setPassword(response?.data.password);
-              // setPdf(response?.data.pdf);
-              console.log("response", response);
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, [account]);
-
-  const download = () => {
-    const filename = "example.zip";
-    fetch(`${API_KEY}/pdf/download`, {
-      headers: {
-        "Content-Type": "application/zip",
-      },
-      method: "GET",
-    })
-      .then((response) => response.blob())
-      .then((blob) => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        window.URL.revokeObjectURL(url);
-      });
+  const download = async () => {
+    const filePath = "https://nxc-public.s3.amazonaws.com/LookingGlass.zip";
+    var link = document.createElement("a");
+    link.href = filePath;
+    link.download = filePath.substr(filePath.lastIndexOf("/") + 1);
+    link.click();
   };
   return (
     <div className="flex flex-col md:w-[92%] w-full md:px-[100px] md:py-[50px] px-[20px] py-[30px] mx-auto bg-transparent">
       <div className="mx-auto mt-[20px] foreground">
         <div className="ml-[15%] mt-[15%]">
-          <div className="grid grid-cols-8 grid-flow-col gap-[10px]">
+          <div className="grid grid-cols-8 grid-flow-col gap-[15px]">
             {nfts.map((token) => (
-              <NFTCard key={token.name} nft={token} flag={false} />
+              <NFTCardClaim key={token.name} nft={token} flag={false} />
             ))}
           </div>
           {nfts.length !== 0 && (
@@ -118,7 +85,7 @@ const Home = () => {
           )}
         </div>
       </div>
-      {nfts.length === 0 && (
+      {nfts.length !== 0 && (
         <div className="mx-auto mt-[20px] foreground1">
           <div className="mt-[15%] flex flex-row justify-center">
             <div>
@@ -132,7 +99,7 @@ const Home = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   className="focus:border focus:border-[#84dd1f] hover:border hover:border-[#828282] border border-[#333333] w-[100%] md:w-[300px] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[20px] pl-[25px] py-[0px] inline"
-                  value={password}
+                  value={PDF_PASSWORD}
                   placeholder=""
                 ></input>
                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center mt-[20px]">
