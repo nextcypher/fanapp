@@ -50,6 +50,16 @@ const NFTCardClaim = ({ nft, flag = true }) => {
     fetchData();
   });
 
+  function convert(num) {
+    switch (num.toString().length) {
+      case 1: return `000${num}`
+      case 2: return `00${num}`
+      case 3: return `0${num}`
+      case 4: return num
+      default: return "0000"
+    }
+  }
+
   const signMessage = async () => {
     const date = new Date();
     if (!library) return;
@@ -85,7 +95,7 @@ const NFTCardClaim = ({ nft, flag = true }) => {
     claimed ? (
       <div className="max-w-lg rounded overflow-hidden shadow-lg">
 
-        <img src={nft.image} alt="" className="w-full" />
+        <img src={`https://nxc-public.s3.amazonaws.com/tn/${convert(nft.edition)}.jpg`} alt="" className="w-full" />
 
         <div className="px-6 py-4">
           {nft.traits?.map((trait, index) => (
@@ -105,7 +115,7 @@ const NFTCardClaim = ({ nft, flag = true }) => {
     ) : (
       <div className="max-w-lg rounded overflow-hidden shadow-lg cursor-pointer" onClick={signMessage}>
 
-        <img src={nft.image} alt="" className="w-full" />
+        <img src={`https://nxc-public.s3.amazonaws.com/tn/${convert(nft.edition)}.jpg`} alt="" className="w-full" />
 
         <div className="px-6 py-4">
           {nft.traits?.map((trait, index) => (
