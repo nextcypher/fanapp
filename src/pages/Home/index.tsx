@@ -61,7 +61,7 @@ const Home = () => {
   }, [account]);
 
   const download = async () => {
-    const filePath = "https://nxc-public.s3.amazonaws.com/LookingGlass.zip";
+    const filePath = "https://nxc-public.s3.amazonaws.com/LookingGlass.pdf";
     var link = document.createElement("a");
     link.href = filePath;
     link.download = filePath.substr(filePath.lastIndexOf("/") + 1);
