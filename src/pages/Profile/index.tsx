@@ -31,7 +31,7 @@ const Profile = () => {
     fetchData();
   });
   return (
-    <div className="flex flex-col md:w-[92%] w-full md:px-[100px] md:py-[50px] px-[20px] py-[30px] mx-auto bg-transparent">
+    <div className="flex flex-col md:w-[92%] w-full md:px-[100px] md:pt-[50px] px-[20px] pt-[30px] mx-auto bg-transparent">
       {account ? (
         <div>
           <div>

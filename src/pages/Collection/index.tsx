@@ -50,16 +50,13 @@ function Collection() {
 
   return (
     <div>
-      <div className="bg-black border gap-[30px] text-[#F2F2F2] text-[18px] border-[#252525] mx-auto md:my-[20px] md:w-[40%] fit w-[40%] rounded-[10px] px-[30px] py-[20px]">
-        My Collections
-      </div>
-      <div className="container mx-auto">
+      <div className="container mx-auto mt-[18px]">
         {!isLoading && nfts.length === 0 && (
           <h1 className="text-5xl text-center mx-auto mt-32">
             No Collection Found
           </h1>
         )}
-        <div className="grid grid-cols-10 gap-4">
+        <div className="grid grid-cols-5 gap-4">
           {nfts.map((token) => (
             <NFTCard key={token.name} nft={token} />
           ))}

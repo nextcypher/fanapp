@@ -1,32 +1,32 @@
-import { useEffect, useState, useCallback } from "react";
+import { Menu, MenuButton, MenuItem } from "@szhsin/react-menu";
+import { useWeb3React } from "@web3-react/core";
+import axios from "axios";
+import { ethers } from "ethers";
+import { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import Modal from "react-modal";
 import { Link } from "react-router-dom";
-import { useWeb3React } from "@web3-react/core";
-import toast, { Toaster } from "react-hot-toast";
-import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
-import { ethers } from "ethers";
-import axios from "axios";
 // import { json2csv } from "json-2-csv";
 // import { parseAsync } from "json2csv/lib/json2csv";
-import json2csv from "json2csv";
-import { connectors } from "./connectors";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { truncateAddress } from "./utils";
+import Button from "components/Shared/Button";
+import json2csv from "json2csv";
+import { BiLogOut } from "react-icons/bi";
+import { BsGridFill } from "react-icons/bs";
+import { FaFileDownload, FaUserAlt } from "react-icons/fa";
+import { IoMdSettings } from "react-icons/io";
 import {
-  INFURA_API_KEY,
-  INFURA_URL,
   ADMIN_WALLET,
   API_KEY,
+  INFURA_API_KEY,
+  INFURA_URL,
 } from "utils/api.contant";
-import Metamask from "../../assets/images/metamask.png";
 import Coinbase from "../../assets/images/coinbaseWalletIcon.svg";
+import Metamask from "../../assets/images/metamask.png";
 import Wallet from "../../assets/images/walletConnectIcon.svg";
-import { IoMdSettings } from "react-icons/io";
-import { BiLogOut } from "react-icons/bi";
-import { FaUserAlt } from "react-icons/fa";
-import { BsGridFill } from "react-icons/bs";
-import { FaFileDownload } from "react-icons/fa";
+import { connectors } from "./connectors";
+import { truncateAddress } from "./utils";
 
 const customStyles = {
   content: {
@@ -40,6 +40,7 @@ const customStyles = {
     backgroundColor: "#191b1f",
     color: "white",
     borderRadius: "12px",
+    zIndex: "100",
   },
 };
 
@@ -189,10 +190,10 @@ const ConnectWallet = () => {
             <Menu
               menuButton={
                 <MenuButton>
-                  <button className="md:text-[20px] text-[12px] leading-[30px] bg-black hover:bg-white/10 duration-100 border-2 border-[#252525] md:px-[30px] md:py-[15px] p-[12px] rounded-[70px] lowercase">
+                  <Button>
                     {ensName ? ensName : truncateAddress(account)}{" "}
                     <FontAwesomeIcon icon={faArrowRightFromBracket} />
-                  </button>
+                  </Button>
                 </MenuButton>
               }
             >
@@ -225,7 +226,7 @@ const ConnectWallet = () => {
                   </Link>
                 </MenuItem>
                 {account === ADMIN_WALLET && (
-                  <MenuItem className="text-[20px] text-gray-300 pt-[13px]">
+                  <MenuItem className="text-[20px] text-gray-300 pt-[13px] cursor-pointer">
                     <div
                       onClick={csvDownload}
                       className="hover:opacity-80 duration-100"
@@ -250,12 +251,7 @@ const ConnectWallet = () => {
             </Menu>
           </div>
         ) : (
-          <button
-            className="font-['Ailerons'] text-[20px] leading-[30px] bg-black hover:bg-white/10 duration-100 border-2 border-[#252525] px-[30px] py-[15px] rounded-[70px]"
-            onClick={() => setIsOpen(true)}
-          >
-            CONNECT
-          </button>
+          <Button onClick={() => setIsOpen(true)}>connect wallet</Button>
         )}
       </div>
     </>
