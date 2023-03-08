@@ -16,6 +16,7 @@ const NFTCardClaim: FunctionComponent<Props> = ({ nft, flag = true }) => {
   const nftIndex = nft.edition;
   const [signature, setSignature] = useState("");
   const [signedMessage, setSignedMessage] = useState("");
+  const [axiosResponse, setAxiosResponse] = useState(null);
   const [error, setError] = useState("");
   useEffect(() => {
     const fetchData = async () => {
@@ -31,7 +32,7 @@ const NFTCardClaim: FunctionComponent<Props> = ({ nft, flag = true }) => {
         });
     };
     fetchData();
-  }, [signature]);
+  }, [signature, axiosResponse]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -100,7 +101,7 @@ const NFTCardClaim: FunctionComponent<Props> = ({ nft, flag = true }) => {
           shipAddress: shipAddress,
         })
         .then(function (response) {
-          window.location.reload();
+          setAxiosResponse(response.data);
         })
         .catch(function (error) {
           console.log(error);
