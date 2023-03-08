@@ -3,6 +3,7 @@ import NFTCardClaim from "components/NFTCardClaim";
 import Container from "components/Shared/Container";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
+import { useWeb3React } from "@web3-react/core";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import downloadVector from "../../assets/images/download.svg";
@@ -15,9 +16,9 @@ import {
 } from "../../utils/api.contant";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
-const account = "0x6FBb4B4Fa983B223bceEfC4AEbD543BB94745cF9";
+// const account = "0x6FBb4B4Fa983B223bceEfC4AEbD543BB94745cF9";
 const Home = () => {
-  // const { account } = useWeb3React();
+  const { account } = useWeb3React();
   const [nfts, setNFTs] = useState([]);
   const [pdf, setPdf] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -84,61 +85,63 @@ const Home = () => {
           ))}
         </div>
       </div>
-      <div className="flex md:flex-row flex-col items-center rounded-[2rem] px-[40px] py-[24px] bg-[#1A1A1D] mb-28">
-        <div className="flex flex-row items-center flex-1  md:mb-[0] mb-[8px]">
-          <img
-            src={pdfImg}
-            alt="pdf"
-            width={100}
-            height={150}
-            className="md:w-[89px] w-[50px] md:h-[89px] h-[50px]"
-          />
-          <div className="flex flex-col ml-4">
-            <h6 className="font-medium md:text-[22px] text-[15px] md:mb-3 mb-2">
-              Looking Glass #1
-            </h6>
-            <p className="text-[#757575] md:text-[15px] text-[12px] font-normal">
-              (20MB PDF)
-            </p>
+      {nfts.length !== 0 && (
+        <div className="flex md:flex-row flex-col items-center rounded-[2rem] px-[40px] py-[24px] bg-[#1A1A1D] mb-28">
+          <div className="flex flex-row items-center flex-1  md:mb-[0] mb-[8px]">
+            <img
+              src={pdfImg}
+              alt="pdf"
+              width={100}
+              height={150}
+              className="md:w-[89px] w-[50px] md:h-[89px] h-[50px]"
+            />
+            <div className="flex flex-col ml-4">
+              <h6 className="font-medium md:text-[22px] text-[15px] md:mb-3 mb-2">
+                Looking Glass #1
+              </h6>
+              <p className="text-[#757575] md:text-[15px] text-[12px] font-normal">
+                (20MB PDF)
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="relative">
-          <input
-            type={showPassword ? "text" : "password"}
-            className="text-white text-[1.5rem] font-medium p-6 md:w-[349px] w-full bg-[#09090C] md:mb-[0] mb-[10px] border-solid border-[1px] border-white border-opacity-5 rounded-[6px]  "
-            value={PDF_PASSWORD}
-            placeholder=""
-          />
-          <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
-            {showPassword ? (
-              <AiFillEyeInvisible
-                onClick={() => setShowPassword(!showPassword)}
-                size={35}
-              >
-                {showPassword ? "hide" : "show"}
-              </AiFillEyeInvisible>
-            ) : (
-              <AiFillEye
-                onClick={() => setShowPassword(!showPassword)}
-                size={35}
-              >
-                {showPassword ? "hide" : "show"}
-              </AiFillEye>
-            )}
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              className="text-white text-[1.5rem] font-medium p-6 md:w-[349px] w-full bg-[#09090C] md:mb-[0] mb-[10px] border-solid border-[1px] border-white border-opacity-5 rounded-[6px]  "
+              value={PDF_PASSWORD}
+              placeholder=""
+            />
+            <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+              {showPassword ? (
+                <AiFillEyeInvisible
+                  onClick={() => setShowPassword(!showPassword)}
+                  size={35}
+                >
+                  {showPassword ? "hide" : "show"}
+                </AiFillEyeInvisible>
+              ) : (
+                <AiFillEye
+                  onClick={() => setShowPassword(!showPassword)}
+                  size={35}
+                >
+                  {showPassword ? "hide" : "show"}
+                </AiFillEye>
+              )}
+            </div>
           </div>
+          <button
+            onClick={download}
+            className="flex flex-row items-center px-[24px] py-[14px] bg-[#3417FF] rounded-[6px] ml-6"
+          >
+            <img
+              src={downloadVector}
+              className="mr-[1.2rem] object-contain shrink-0 w-[1.2rem] font-medium text-[15px] text-white"
+              alt=""
+            />
+            Download PDF
+          </button>
         </div>
-        <button
-          onClick={download}
-          className="flex flex-row items-center px-[24px] py-[14px] bg-[#3417FF] rounded-[6px] ml-6"
-        >
-          <img
-            src={downloadVector}
-            className="mr-[1.2rem] object-contain shrink-0 w-[1.2rem] font-medium text-[15px] text-white"
-            alt=""
-          />
-          Download PDF
-        </button>
-      </div>
+      )}
       {/* <div className="mt-[20px] foreground">
         <div className="ml-[15%] mt-[15%]">
           <div className="grid grid-cols-8 grid-flow-col gap-[15px]">

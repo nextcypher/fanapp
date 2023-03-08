@@ -8,9 +8,9 @@ import {
 } from "../../utils/api.contant";
 import NFTCard from "../../components/NFTCard";
 
-const account = "0x6FBb4B4Fa983B223bceEfC4AEbD543BB94745cF9";
+// const account = "0x6FBb4B4Fa983B223bceEfC4AEbD543BB94745cF9";
 function Collection() {
-  //   const { library, account } = useWeb3React();
+  const { library, account } = useWeb3React();
   const [nfts, setNFTs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const fetchURL = `${baseURL + ALCHEMY_API_KEY}/getNFTs/?owner=${account}`;
