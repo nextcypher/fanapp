@@ -8,7 +8,7 @@ import { FaUserAlt } from "react-icons/fa";
 import { FaEthereum } from "react-icons/fa";
 
 const Profile = () => {
-  const { library, account } = useWeb3React();
+  const { account } = useWeb3React();
   const [shipAddress, setShipAddress] = useState("");
   useEffect(() => {
     const fetchData = async () => {

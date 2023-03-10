@@ -137,46 +137,6 @@ const NFTCardClaim: FunctionComponent<Props> = ({ nft, flag = true }) => {
         )}
       </div>
     </div>
-    // claimed ? (
-    //   <div className="max-w-lg rounded overflow-hidden shadow-lg">
-
-    //     <img src={`https://nxc-public.s3.amazonaws.com/tn/${convert(nft.edition)}.jpg`} alt="" className="w-full" />
-
-    //     <div className="px-6 py-4">
-    //       {nft.traits?.map((trait, index) => (
-    //         <span
-    //           key={index}
-    //           className="inline-block bg-gray-200
-    //        rounded-full px-3 py-2 text-sm font-semibold text-gray-700 mr-2"
-    //         >
-    //           {trait["trait_type"]}:{trait.value}
-
-    //         </span>
-    //       ))}
-    //       <BsCheckLg size={40} className="mt-[-40px] ml-[20px]" color="#10CD00" />
-    //     </div>
-
-    //   </div>
-    // ) : (
-    //   <div className="max-w-lg rounded overflow-hidden shadow-lg cursor-pointer" onClick={signMessage}>
-
-    //     <img src={`https://nxc-public.s3.amazonaws.com/tn/${convert(nft.edition)}.jpg`} alt="" className="w-full" />
-
-    //     <div className="px-6 py-4">
-    //       {nft.traits?.map((trait, index) => (
-    //         <span
-    //           key={index}
-    //           className="inline-block bg-gray-200
-    //        rounded-full px-3 py-2 text-sm font-semibold text-gray-700 mr-2"
-    //         >
-    //           {trait["trait_type"]}:{trait.value}
-
-    //         </span>
-    //       ))}
-    //     </div>
-
-    //   </div>
-    // )
   );
 };
 

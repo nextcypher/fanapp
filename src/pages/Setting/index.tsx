@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
 import { CountryDropdown } from "react-country-region-selector";
 import axios from "axios";
-import { API_KEY, GOOGLE_KEY } from "../../utils/api.contant";
+import { API_KEY } from "../../utils/api.contant";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 

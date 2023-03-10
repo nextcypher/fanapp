@@ -7,3 +7,4 @@ export const INFURA_URL = process.env.REACT_APP_INFURA_URL;
 export const INFURA_API_KEY = process.env.REACT_APP_INFURA_API_KEY;
 export const ADMIN_WALLET = process.env.REACT_APP_ADMIN_WALLET;
 export const PDF_PASSWORD = process.env.REACT_APP_PASSWORD;
+export const PDF_PATH = process.env.REACT_APP_PDF_PATH;

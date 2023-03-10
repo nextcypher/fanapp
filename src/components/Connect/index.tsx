@@ -6,8 +6,6 @@ import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import Modal from "react-modal";
 import { Link } from "react-router-dom";
-// import { json2csv } from "json-2-csv";
-// import { parseAsync } from "json2csv/lib/json2csv";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "components/Shared/Button";
