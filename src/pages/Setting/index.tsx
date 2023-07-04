@@ -4,9 +4,16 @@ import { CountryDropdown } from "react-country-region-selector";
 import axios from "axios";
 import { API_KEY } from "../../utils/api.contant";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import "react-phone-number-input/style.css";
-import PhoneInput from "react-phone-number-input";
+import "react-phone-input-2/lib/style.css";
+import PhoneInput from "react-phone-input-2";
 import "react-tabs/style/react-tabs.css";
+import styled from "styled-components";
+
+const StyledPhoneInput = styled(PhoneInput)`
+  &:hover {
+    background-color: black;
+  }
+`;
 
 const Setting = () => {
   const [isChecked, setIsChecked] = useState(false);
@@ -199,12 +206,29 @@ const Setting = () => {
           <div className="font-['Ailerons'] text-[31px] leading-[34px] my-[10px] text-center">
             Phone Number
           </div>
-          <div className="text-center">
-            <PhoneInput
-              className="focus:border focus:border-[#10CD00] hover:border hover:border-[#828282] border border-[#333333] md:w-[60%] w-[80%] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[5px] pl-[25px] mx-auto"
+          <div className="w-full ml-[35%]">
+            <StyledPhoneInput
               placeholder="Enter phone number"
               value={phone}
               onChange={setPhone}
+              containerStyle={{
+                border: "solid 0px #333333",
+              }}
+              inputStyle={{
+                color: "white",
+                background: "transparent",
+                border: "solid 1px #333333",
+                fontSize: "20px",
+                height: "54px",
+              }}
+              buttonStyle={{
+                background: "transparent",
+                border: "solid 0px",
+                borderRight: "solid 1px #333333",
+              }}
+              dropdownStyle={{
+                background: "black",
+              }}
             />
           </div>
         </div>
