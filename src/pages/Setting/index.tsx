@@ -4,6 +4,8 @@ import { CountryDropdown } from "react-country-region-selector";
 import axios from "axios";
 import { API_KEY } from "../../utils/api.contant";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
 import "react-tabs/style/react-tabs.css";
 
 const Setting = () => {
@@ -14,6 +16,7 @@ const Setting = () => {
   const [country, setCountry] = useState("");
   const [tabIndex, setTabIndex] = useState(0);
   const [countryCode, setCountryCode] = useState("");
+  const [phone, setPhone] = useState("");
   const [signature, setSignature] = useState("");
   const [signedMessage, setSignedMessage] = useState("");
   const [error, setError] = useState("");
@@ -169,7 +172,43 @@ const Setting = () => {
   return (
     <div className="flex flex-col md:w-[92%] w-full md:px-[100px] md:py-[50px] px-[20px] py-[30px] mx-auto bg-transparent">
       <div className="bg-black border gap-[30px] text-[#F2F2F2] border-[#252525] mx-auto md:m-0 md:w-[80%] fit w-[90%] rounded-[30px] px-[30px] py-[40px]">
-        <div className="font-['Ailerons'] text-[31px] leading-[34px] mb-[10px] text-center">
+        <div>
+          <div className="font-['Ailerons'] text-[31px] leading-[34px] my-[10px] text-center">
+            Your name
+          </div>
+          <div className="grid gap-6 mb-6 md:grid-cols-2">
+            <div>
+              <input
+                type="text"
+                id="first_name"
+                className="focus:border focus:border-[#10CD00] hover:border hover:border-[#828282] border border-[#333333] md:w-[100%] w-[100%] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[5px] pl-[25px] py-[0px]"
+                placeholder="First Name"
+              ></input>
+            </div>
+            <div>
+              <input
+                type="text"
+                id="last_name"
+                className="focus:border focus:border-[#10CD00] hover:border hover:border-[#828282] border border-[#333333] md:w-[100%] w-[100%] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[5px] pl-[25px] py-[0px]"
+                placeholder="Last Name"
+              ></input>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div className="font-['Ailerons'] text-[31px] leading-[34px] my-[10px] text-center">
+            Phone Number
+          </div>
+          <div className="text-center">
+            <PhoneInput
+              className="focus:border focus:border-[#10CD00] hover:border hover:border-[#828282] border border-[#333333] md:w-[60%] w-[80%] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[5px] pl-[25px] mx-auto"
+              placeholder="Enter phone number"
+              value={phone}
+              onChange={setPhone}
+            />
+          </div>
+        </div>
+        <div className="font-['Ailerons'] text-[31px] leading-[34px] my-[10px] text-center">
           Shipping Address
         </div>
         <Tabs
