@@ -24,6 +24,8 @@ const Setting = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const [countryCode, setCountryCode] = useState("");
   const [phone, setPhone] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [signature, setSignature] = useState("");
   const [signedMessage, setSignedMessage] = useState("");
   const [error, setError] = useState("");
@@ -70,6 +72,8 @@ const Setting = () => {
           wallet: account,
           signature: signature,
           shipAddress: formatedAddress,
+          name: firstName + " " + lastName,
+          phone: phone,
         })
         .then(function (response) {
           console.log(response);
@@ -124,6 +128,8 @@ const Setting = () => {
           wallet: account,
           signature: signature,
           shipAddress: formatedAddress,
+          name: firstName + " " + lastName,
+          phone: phone,
         })
         .then(function (response) {
           console.log(response);
@@ -190,6 +196,7 @@ const Setting = () => {
                 id="first_name"
                 className="focus:border focus:border-[#10CD00] hover:border hover:border-[#828282] border border-[#333333] md:w-[100%] w-[100%] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[5px] pl-[25px] py-[0px]"
                 placeholder="First Name"
+                onChange={(e)=>{setFirstName(e.target.value)}}
               ></input>
             </div>
             <div>
@@ -198,6 +205,7 @@ const Setting = () => {
                 id="last_name"
                 className="focus:border focus:border-[#10CD00] hover:border hover:border-[#828282] border border-[#333333] md:w-[100%] w-[100%] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[5px] pl-[25px] py-[0px]"
                 placeholder="Last Name"
+                onChange={(e)=>{setLastName(e.target.value)}}
               ></input>
             </div>
           </div>
@@ -208,7 +216,8 @@ const Setting = () => {
           </div>
           <div className="w-full ml-[35%]">
             <StyledPhoneInput
-              placeholder="Enter phone number"
+              country={'us'}
+              placeholder="(+1)"
               value={phone}
               onChange={setPhone}
               containerStyle={{

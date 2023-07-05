@@ -13,6 +13,8 @@ const NFTCardClaim: FunctionComponent<Props> = ({ nft, flag = true }) => {
   const [claimed, setClaimed] = useState(false);
   const { library, account } = useWeb3React();
   const [shipAddress, setShipAddress] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const nftIndex = nft.edition;
   const [signature, setSignature] = useState("");
   const [signedMessage, setSignedMessage] = useState("");
@@ -42,6 +44,8 @@ const NFTCardClaim: FunctionComponent<Props> = ({ nft, flag = true }) => {
             .get(`${API_KEY}/address/${account}`)
             .then(function (response) {
               setShipAddress(response.data.data.shipAddress);
+              setName(response.data.data.name);
+              setPhone(response.data.data.phone);
               console.log(response);
             })
             .catch(function (error) {
@@ -78,13 +82,13 @@ const NFTCardClaim: FunctionComponent<Props> = ({ nft, flag = true }) => {
         method: "personal_sign",
         params: [
           "NFT index: " +
-            nftIndex.toString() +
-            "\n" +
-            "Shipping Address: " +
-            shipAddress +
-            "\n" +
-            "Date: " +
-            date.toDateString(),
+          nftIndex.toString() +
+          "\n" +
+          "Shipping Address: " +
+          shipAddress +
+          "\n" +
+          "Date: " +
+          date.toDateString(),
           account,
         ],
       });
@@ -99,6 +103,8 @@ const NFTCardClaim: FunctionComponent<Props> = ({ nft, flag = true }) => {
           signature: signature,
           timestamp: date.toDateString(),
           shipAddress: shipAddress,
+          name: name,
+          phone: phone
         })
         .then(function (response) {
           setAxiosResponse(response.data);
@@ -114,9 +120,8 @@ const NFTCardClaim: FunctionComponent<Props> = ({ nft, flag = true }) => {
   return (
     <div
       onClick={claimed ? undefined : signMessage}
-      className={`flex flex-col md:w-[210px] w-[130px] md:p-[1.6rem] p-[0.8rem] items-center justify-center border-[1px] border-[#3417FF] rounded-[0.8rem] backdrop-blur-[3.6px] z-0 ${
-        claimed ? "" : "cursor-pointer"
-      }`}
+      className={`flex flex-col md:w-[210px] w-[130px] md:p-[1.6rem] p-[0.8rem] items-center justify-center border-[1px] border-[#3417FF] rounded-[0.8rem] backdrop-blur-[3.6px] z-0 ${claimed ? "" : "cursor-pointer"
+        }`}
     >
       <img
         className="w-full md:h-[240px] h-[200px] mb-5 rounded-md object-cover"
@@ -124,7 +129,7 @@ const NFTCardClaim: FunctionComponent<Props> = ({ nft, flag = true }) => {
           nft.edition
         )}.jpg`}
         alt=""
-        // alt={title}
+      // alt={title}
       />
       <div className="w-full flex flex-row items-center justify-between">
         <h5 className="font-[Outfit] md:text-[18px] text-[13px] font-[400] line-[23px] text-ellipsis overflow-hidden whitespace-nowrap">

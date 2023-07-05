@@ -10,6 +10,8 @@ import { FaEthereum } from "react-icons/fa";
 const Profile = () => {
   const { account } = useWeb3React();
   const [shipAddress, setShipAddress] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -18,6 +20,8 @@ const Profile = () => {
             .get(`${API_KEY}/address/${account}`)
             .then(function (response) {
               setShipAddress(response.data.data.shipAddress);
+              setName(response.data.data.name);
+              setPhone(response.data.data.phone);
               console.log(response);
             })
             .catch(function (error) {
@@ -37,7 +41,9 @@ const Profile = () => {
           <div>
             <FaUserAlt color="gray" size={50} className="inline mr-[20px]" />
             <span className="font-['Ailerons'] text-[30px] pt-[10px]">
-              Unnamed
+              {
+                name ? name : "UNNAMED"
+              }
             </span>
           </div>
           <div className="mt-[20px] mb-[20px] ml-[10px]">
@@ -45,9 +51,20 @@ const Profile = () => {
             <span className="text-[16px] mt-[10px] mr-[20px] underline">
               {truncateAddress(account)}
             </span>
-            <span className="text-gray-400">Joined Febrary 2023</span>
           </div>
           <div className="bg-black border gap-[30px] text-[#F2F2F2] border-[#252525] mx-auto md:m-0 md:w-[800px] fit w-[80%] rounded-[30px] px-[30px] py-[40px]">
+            <div className="font-['Ailerons'] text-[31px] leading-[34px] mt-[10px]">
+              Phone Number
+            </div>
+            {
+              phone ? (
+                <div className="text-[16px] leading-[29px] italic">
+                  {phone}
+                </div>
+              ) : (
+                <div></div>
+              )
+            }
             <div className="font-['Ailerons'] text-[31px] leading-[34px] mt-[10px]">
               Shipping Address
             </div>
