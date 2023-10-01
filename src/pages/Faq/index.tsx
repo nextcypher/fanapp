@@ -84,7 +84,7 @@ const Faq = () => {
                     </p >
                 </details >
                 <details className="border-2 border-[#252525] rounded-[10px] pt-5 pb-5 px-5 relative mb-1 bg-black  duration-500 mb-[12px]">
-                    <summary className="list-none font-semibold relative text-[20px] cursor-pointer pr-7 transition-colors duration-200 text-[#959595] hover:text-white focus:outline-none">
+                    <summary className="list-none font-semibold relative text-[20px] cursor-pointer pr-7 transition-colors duration-200 text-[#959595] hover:text-white hover:underline focus:outline-none">
                         How to claim your NFT to get comic book?
                         <div className="absolute top-1 right-0 bg-[#252525] hover:bg-slate rounded-full px-1 py-0.5 cursor-pointer visible">
                             <svg
@@ -107,7 +107,7 @@ const Faq = () => {
                     </p >
                 </details >
                 <details className="border-2 border-[#252525] rounded-[10px] pt-5 pb-5 px-5 relative mb-1 bg-black  duration-500 mb-[36px]">
-                    <summary className="list-none font-semibold relative text-[20px] cursor-pointer pr-7 transition-colors duration-200 text-[#959595] hover:text-white focus:outline-none">
+                    <summary className="list-none font-semibold relative text-[20px] cursor-pointer pr-7 transition-colors duration-200 text-[#959595] hover:text-white hover:underline focus:outline-none">
                         If your address is international, not US-domain, validate function always works fine?
                         <div className="absolute top-1 right-0 bg-[#252525] hover:bg-slate rounded-full px-1 py-0.5 cursor-pointer visible">
                             <svg
