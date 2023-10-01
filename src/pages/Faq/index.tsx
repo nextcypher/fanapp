@@ -83,7 +83,7 @@ const Faq = () => {
                         4. Once you have saved your settings, you can view your information in your profile page.<br></br>
                     </p >
                 </details >
-                <details className="border-2 border-[#252525] rounded-[10px] pt-5 pb-5 px-5 relative mb-1 bg-black  duration-500 mb-[36px]">
+                <details className="border-2 border-[#252525] rounded-[10px] pt-5 pb-5 px-5 relative mb-1 bg-black  duration-500 mb-[12px]">
                     <summary className="list-none font-semibold relative text-[20px] cursor-pointer pr-7 transition-colors duration-200 text-[#959595] hover:text-white focus:outline-none">
                         How to claim your NFT to get comic book?
                         <div className="absolute top-1 right-0 bg-[#252525] hover:bg-slate rounded-full px-1 py-0.5 cursor-pointer visible">
@@ -104,6 +104,27 @@ const Faq = () => {
                         2. Click on the NFT card and sign in to your wallet.<br></br>
                         3. Your shipping address will be stored in our delivery team database.<br></br>
                         4. Finally, you will receive your comic book soon.<br></br>
+                    </p >
+                </details >
+                <details className="border-2 border-[#252525] rounded-[10px] pt-5 pb-5 px-5 relative mb-1 bg-black  duration-500 mb-[36px]">
+                    <summary className="list-none font-semibold relative text-[20px] cursor-pointer pr-7 transition-colors duration-200 text-[#959595] hover:text-white focus:outline-none">
+                        If your address is international, not US-domain, validate function always works fine?
+                        <div className="absolute top-1 right-0 bg-[#252525] hover:bg-slate rounded-full px-1 py-0.5 cursor-pointer visible">
+                            <svg
+                                className="h-10 w-8 text-pink-700"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                        </div>
+                    </summary>
+                    <p className="pt-3 transition-opacity duration-500 text-[16px] pl-[20px] text-[#959595] hover:text-white">
+                        In general, International Address Validator works but in rare cases, this Google API doesn't support some areas.<br></br>
+                        In these cases, you can contact the developer on Discord <a href="https://discord.com/users/vadym5623" className="text-white hover:underline">Vadym</a>
                     </p >
                 </details >
             </div >
