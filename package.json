@@ -29,6 +29,7 @@
     "json-2-csv": "^3.18.0",
     "json2csv": "^6.0.0-alpha.2",
     "keen-slider": "^6.8.5",
+    "lodash": "^4.17.21",
     "net": "^1.0.2",
     "nft.storage": "^7.0.0",
     "node-sass": "^7.0.3",

@@ -1,67 +1,27 @@
-import axios from "axios";
-import NFTCardClaim from "components/NFTCardClaim";
 import Container from "components/Shared/Container";
-import "keen-slider/keen-slider.min.css";
-import { useWeb3React } from "@web3-react/core";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import downloadVector from "../../assets/images/download.svg";
-import pdfImg from "../../assets/images/pdf-new.png";
-import {
-    ALCHEMY_API_KEY,
-    baseURL,
-    CONTRACT_ADDRESS,
-    PDF_PASSWORD,
-    PDF_PATH,
-} from "../../utils/api.contant";
-import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { debounce } from 'lodash';
 
 const Faq = () => {
-    const { account } = useWeb3React();
-    const [nfts, setNFTs] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [showPassword, setShowPassword] = useState(false);
-    const fetchURL = `${baseURL + ALCHEMY_API_KEY}/getNFTs/?owner=${account}`;
-    const options = {
-        method: "GET",
-        url: fetchURL,
-        params: { omitMetadata: "false", contractAddresses: [CONTRACT_ADDRESS] },
-        headers: { accept: "application/json" },
-    };
+    const [openItem, setOpenItem] = useState(null);
 
-    const fetchCollection = async () => {
-        const itemArray = [];
-        axios
-            .request(options)
-            .then(function (response) {
-                response?.data?.ownedNfts.map((nft) => {
-                    itemArray.push(nft.metadata);
-                });
-            })
-            .catch(function (error) {
-                console.error(error);
-            });
-        await new Promise((r) => setTimeout(r, 5000));
-        setNFTs(itemArray.slice(0, itemArray.length > 5 ? 5 : itemArray.length));
-        setIsLoading(true);
-    };
+    const handleItemClick = (index) => {
+        setOpenItem(index);
+    }
 
-    useEffect(() => {
-        fetchCollection();
-    }, [account]);
+    const debouncedHandleItemClick = debounce(handleItemClick, 200);
 
-    const download = async () => {
-        const filePath = PDF_PATH;
-        var link = document.createElement("a");
-        link.href = filePath;
-        link.download = filePath.substr(filePath.lastIndexOf("/") + 1);
-        link.click();
-    };
     return (
         <Container className="pt-[108px] px-auto">
             <div className="w-[60%] mx-auto">
-                <details className="border-2 border-[#252525] rounded-[10px] pt-5 pb-5 px-5 relative mb-1 bg-black  duration-500 mb-[12px]">
-                    <summary className="list-none font-semibold relative text-[20px] cursor-pointer pr-7 transition-colors duration-200 text-[#959595] hover:text-white hover:underline focus:outline-none">
+                <details
+                    className="border-2 border-[#252525] rounded-[10px] pt-5 pb-5 px-5 relative mb-1 bg-black  duration-500 mb-[12px]"
+                    open={openItem === 0}
+                    onClick={() => debouncedHandleItemClick(0)}
+                >
+                    <summary
+                        className="list-none font-semibold relative text-[20px] cursor-pointer pr-7 transition-colors duration-200 text-[#959595] hover:text-white hover:underline focus:outline-none"
+                    >
                         How to set and check your profile information?
                         <div className="absolute top-1 right-0 bg-[#252525] hover:bg-slate rounded-full px-1 py-0.5 cursor-pointer visible">
                             <svg
@@ -69,10 +29,10 @@ const Faq = () => {
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 24 24"
-                                stroke-width="1.5"
+                                strokeWidth="1.5"
                                 stroke="currentColor"
                             >
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                             </svg>
                         </div>
                     </summary>
@@ -81,10 +41,16 @@ const Faq = () => {
                         2. Fill out all the required fields in the settings page and validate the information.<br></br>
                         3. Save all the settings and check your wallet sign in your wallet to ensure that the information has been saved correctly.<br></br>
                         4. Once you have saved your settings, you can view your information in your profile page.<br></br>
-                    </p >
-                </details >
-                <details className="border-2 border-[#252525] rounded-[10px] pt-5 pb-5 px-5 relative mb-1 bg-black  duration-500 mb-[12px]">
-                    <summary className="list-none font-semibold relative text-[20px] cursor-pointer pr-7 transition-colors duration-200 text-[#959595] hover:text-white hover:underline focus:outline-none">
+                    </p>
+                </details>
+                <details
+                    className={`border-2 border-[#252525] rounded-[10px] pt-5 pb-5 px-5 relative mb-1 bg-black  duration-500 mb-[12px]`}
+                    open={openItem === 1}
+                    onClick={() => debouncedHandleItemClick(1)}
+                >
+                    <summary
+                        className="list-none font-semibold relative text-[20px] cursor-pointer pr-7 transition-colors duration-200 text-[#959595] hover:text-white hover:underline focus:outline-none"
+                    >
                         How to claim your NFT to get comic book?
                         <div className="absolute top-1 right-0 bg-[#252525] hover:bg-slate rounded-full px-1 py-0.5 cursor-pointer visible">
                             <svg
@@ -92,10 +58,10 @@ const Faq = () => {
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 24 24"
-                                stroke-width="1.5"
+                                strokeWidth="1.5"
                                 stroke="currentColor"
                             >
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                             </svg>
                         </div>
                     </summary>
@@ -104,10 +70,16 @@ const Faq = () => {
                         2. Click on the NFT card and sign in to your wallet.<br></br>
                         3. Your shipping address will be stored in our delivery team database.<br></br>
                         4. Finally, you will receive your comic book soon.<br></br>
-                    </p >
-                </details >
-                <details className="border-2 border-[#252525] rounded-[10px] pt-5 pb-5 px-5 relative mb-1 bg-black  duration-500 mb-[36px]">
-                    <summary className="list-none font-semibold relative text-[20px] cursor-pointer pr-7 transition-colors duration-200 text-[#959595] hover:text-white hover:underline focus:outline-none">
+                    </p>
+                </details>
+                <details
+                    className={`border-2 border-[#252525] rounded-[10px] pt-5 pb-5 px-5 relative mb-1 bg-black  duration-500 mb-[12px]`}
+                    open={openItem === 2}
+                    onClick={() => debouncedHandleItemClick(2)}
+                >
+                    <summary
+                        className="list-none font-semibold relative text-[20px] cursor-pointer pr-7 transition-colors duration-200 text-[#959595] hover:text-white hover:underline focus:outline-none"
+                    >
                         If your address is international, not US-domain, validate function always works fine?
                         <div className="absolute top-1 right-0 bg-[#252525] hover:bg-slate rounded-full px-1 py-0.5 cursor-pointer visible">
                             <svg
@@ -115,19 +87,19 @@ const Faq = () => {
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 24 24"
-                                stroke-width="1.5"
+                                strokeWidth="1.5"
                                 stroke="currentColor"
                             >
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                             </svg>
                         </div>
                     </summary>
                     <p className="pt-3 transition-opacity duration-500 text-[16px] pl-[20px] text-[#959595] hover:text-white">
                         In general, International Address Validator works but in rare cases, this Google API doesn't support some areas.<br></br>
-                        In these cases, you can contact the developer on Discord <a href="https://discord.com/users/vadym5623" className="text-white hover:underline">Vadym</a>
-                    </p >
-                </details >
-            </div >
+                        In these cases, you can contact <a href="https://discord.com/users/vadym5623" className="text-[#B58841] hover:underline hover:text-[#B58841]">Vadym</a> the developer on Discord
+                    </p>
+                </details>
+            </div>
         </Container >
     );
 };
