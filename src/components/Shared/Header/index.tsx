@@ -10,9 +10,8 @@ import logoImg from "../../../assets/images/next_cyber_logo.png";
 const Header = ({ scrolled }) => {
   return (
     <div
-      className={`top-0 transition-all duration-300 sticky z-[1] ${
-        scrolled ? "bg-black" : ""
-      }`}
+      className={`top-0 transition-all duration-300 sticky z-[1] ${scrolled ? "bg-black" : ""
+        }`}
     >
       <Container className="flex flex-row items-center md:h-[96px] h-[76px] md:py-[28px] py-[18px]">
         <NavLink
@@ -54,6 +53,11 @@ const Header = ({ scrolled }) => {
                     Collections
                   </HeaderLink>
                 </MenuItem>
+                <MenuItem className="text-[20px] text-gray-300 items-center flex justify-center">
+                  <HeaderLink className="py-[13px]" to="/faq">
+                    FAQ
+                  </HeaderLink>
+                </MenuItem>
               </div>
             </Menu>
           </div>
@@ -65,6 +69,9 @@ const Header = ({ scrolled }) => {
           </HeaderLink>
           <HeaderLink to="/collection" className="ml-[52px]">
             Collection
+          </HeaderLink>
+          <HeaderLink to="/faq" className="ml-[52px]">
+            FAQ
           </HeaderLink>
           <div className="flex-1" />
           <ConnectWallet />

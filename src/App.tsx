@@ -3,6 +3,7 @@ import Collection from "pages/Collection";
 import Home from "pages/Home";
 import Profile from "pages/Profile";
 import Setting from "pages/Setting";
+import Faq from "pages/Faq";
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.scss";
@@ -53,6 +54,7 @@ function App() {
         <Route path="/setting" element={<Setting />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/collection" element={<Collection />} />
+        <Route path="/faq" element={<Faq />} />
       </Routes>
       <div className="flex flex-1" />
       <Footer />
