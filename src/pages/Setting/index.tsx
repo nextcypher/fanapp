@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
-import { CountryDropdown } from "react-country-region-selector";
+import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import axios from "axios";
 import { API_KEY } from "../../utils/api.contant";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
@@ -196,7 +196,7 @@ const Setting = () => {
                 id="first_name"
                 className="focus:border focus:border-[#10CD00] hover:border hover:border-[#828282] border border-[#333333] md:w-[100%] w-[100%] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[5px] pl-[25px] py-[0px]"
                 placeholder="First Name"
-                onChange={(e)=>{setFirstName(e.target.value)}}
+                onChange={(e) => { setFirstName(e.target.value) }}
               ></input>
             </div>
             <div>
@@ -205,7 +205,7 @@ const Setting = () => {
                 id="last_name"
                 className="focus:border focus:border-[#10CD00] hover:border hover:border-[#828282] border border-[#333333] md:w-[100%] w-[100%] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[5px] pl-[25px] py-[0px]"
                 placeholder="Last Name"
-                onChange={(e)=>{setLastName(e.target.value)}}
+                onChange={(e) => { setLastName(e.target.value) }}
               ></input>
             </div>
           </div>

@@ -41,7 +41,8 @@ html {
   scroll-behavior: smooth;
   font-weight: 500;
   height: 100%;
-  }
+}
+
 body {
   margin: 0;
   font-family: "Chakra Petch", sans-serif;
@@ -60,7 +61,7 @@ body {
   overflow-y: scroll;
 }
 
-body > #root {
+body>#root {
   flex: 1;
   width: 100%;
 }
@@ -138,17 +139,20 @@ body {
   width: 7px;
   height: 0px;
 }
+
 ::-webkit-scrollbar-thumb {
   background-color: #fff2;
   border-radius: 100px;
   width: 7px;
   height: 7px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background-color: #fff5;
 }
 
 @layer base {
+
   input,
   select,
   textarea {
@@ -215,7 +219,7 @@ body {
     margin-top: 14px;
     width: 200px;
     height: 1px;
-    background-image: linear-gradient(to right, rgba(242,242,242,0), rgba(242,242,242,1), rgba(242,242,242,0));
+    background-image: linear-gradient(to right, rgba(242, 242, 242, 0), rgba(242, 242, 242, 1), rgba(242, 242, 242, 0));
   }
 
   .dark-logo {
@@ -238,6 +242,11 @@ body {
     border-radius: 70px;
   }
 
+  .react-tel-input .selected-flag:hover,
+  .react-tel-input .selected-flag:focus {
+    background-color: #000;
+  }
+
   .text-shadow {
     text-shadow: 0px 148.2px 131.969px rgba(4, 0, 31, 0.113663), 0px 68.5173px 61.0131px rgba(4, 0, 31, 0.164216), 0px 39.2041px 34.9103px rgba(4, 0, 31, 0.202423), 0px 23.7966px 21.1903px rgba(4, 0, 31, 0.237577), 0px 14.3385px 12.7681px rgba(4, 0, 31, 0.275784), 0px 7.9846px 7.1101px rgba(4, 0, 31, 0.326337), 0px 3.43412px 3.058px rgba(4, 0, 31, 0.44);
   }
@@ -253,32 +262,45 @@ body {
   }
 
   .hoverBackground {
-    background-color: rgba(0,0,0,0.9);
+    background-color: rgba(0, 0, 0, 0.9);
   }
 
   .normalBackground {
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.7);
   }
 
   @keyframes outmove {
-    0%   {left: -280px;}
-    70%  {left: 20px;}
-    100%  {left: 0px;}
+    0% {
+      left: -280px;
+    }
+
+    70% {
+      left: 20px;
+    }
+
+    100% {
+      left: 0px;
+    }
   }
 
   @keyframes inmove {
-    0%   {left: 0px;}
-    100%  {left: -280px;}
+    0% {
+      left: 0px;
+    }
+
+    100% {
+      left: -280px;
+    }
   }
 
   .menu-drawer-sample {
-    animation: outmove 0.3s;   
-    animation-fill-mode: forwards; 
+    animation: outmove 0.3s;
+    animation-fill-mode: forwards;
   }
 
   .DrawIn {
     animation: inmove 0.5s;
-    animation-fill-mode: forwards; 
+    animation-fill-mode: forwards;
   }
 
   @media only screen and (max-width: 485px) {
@@ -287,5 +309,3 @@ body {
     }
   }
 }
-
-
