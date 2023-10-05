@@ -183,7 +183,7 @@ const Setting = () => {
   };
 
   return (
-    <div className="flex flex-col md:w-[92%] w-full md:px-[100px] md:py-[50px] px-[20px] py-[30px] mx-auto bg-transparent">
+    <div className="flex flex-col md:w-[92%] w-full md:px-[100px] md:py-[15px] px-[20px] py-[30px] mx-auto bg-transparent">
       <div className="bg-black border gap-[30px] text-[#F2F2F2] border-[#252525] mx-auto md:m-0 md:w-[80%] fit w-[90%] rounded-[30px] px-[30px] py-[40px]">
         <div>
           <div className="font-['Ailerons'] text-[31px] leading-[34px] my-[10px] text-center">
@@ -211,34 +211,39 @@ const Setting = () => {
           </div>
         </div>
         <div>
-          <div className="font-['Ailerons'] text-[31px] leading-[34px] my-[10px] text-center">
-            Phone Number
-          </div>
-          <div className="w-full ml-[35%]">
-            <StyledPhoneInput
-              country={'us'}
-              placeholder="(+1)"
-              value={phone}
-              onChange={setPhone}
-              containerStyle={{
-                border: "solid 0px #333333",
-              }}
-              inputStyle={{
-                color: "white",
-                background: "transparent",
-                border: "solid 1px #333333",
-                fontSize: "20px",
-                height: "54px",
-              }}
-              buttonStyle={{
-                background: "transparent",
-                border: "solid 0px",
-                borderRight: "solid 1px #333333",
-              }}
-              dropdownStyle={{
-                background: "black",
-              }}
-            />
+          <div className="flex flex-col justify-center md:flex-row">
+            <div className="font-['Ailerons'] text-[31px] leading-[34px] my-[10px] text-center mr-[50px]">
+              Phone Number
+            </div>
+            <div>
+              <StyledPhoneInput
+                country={'us'}
+                placeholder="(+1)"
+                value={phone}
+                onChange={setPhone}
+                containerStyle={{
+                  border: "solid 0px #333333",
+                  width: "100%",
+                  margin: "auto",
+                }}
+                inputStyle={{
+                  color: "white",
+                  background: "transparent",
+                  border: "solid 1px #333333",
+                  fontSize: "20px",
+                  height: "54px",
+                  width: "100%"
+                }}
+                buttonStyle={{
+                  background: "transparent",
+                  border: "solid 0px",
+                  borderRight: "solid 1px #333333",
+                }}
+                dropdownStyle={{
+                  background: "black",
+                }}
+              />
+            </div>
           </div>
         </div>
         <div className="font-['Ailerons'] text-[31px] leading-[34px] my-[10px] text-center">

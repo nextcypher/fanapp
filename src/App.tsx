@@ -41,12 +41,12 @@ function App() {
       <img
         src={topLeftVector}
         alt=""
-        className="absolute blur-[10rem] right-[-37rem] bottom-0  z-[-1]"
+        className="absolute blur-[10rem] left-[-37rem] md:right-[-37rem] top-0 md:bottom-0  z-[-1]"
       />
       <img
         src={milkWaySVG}
         alt=""
-        className="absolute w-[130vw] max-w-none blur-[1px] left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] z-[-1] max-h-screen"
+        className="absolute w-[130vw] max-w-none blur-[1px] left-[-37%] md:left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] z-[-1] max-h-screen"
       />
       <Header scrolled={scrolled} />
       <Routes>
