@@ -53,28 +53,33 @@ const Profile = () => {
             </span>
           </div>
           <div className="bg-black border gap-[30px] text-[#F2F2F2] border-[#252525] mx-auto md:m-0 md:w-[800px] fit w-[80%] rounded-[30px] px-[30px] py-[40px]">
-            <div className="font-['Ailerons'] text-[31px] leading-[34px] mt-[10px]">
-              Phone Number
-            </div>
+
             {
               phone ? (
-                <div className="text-[16px] leading-[29px] italic">
-                  {phone}
+                <div>
+                  <div className="font-['Ailerons'] text-[31px] leading-[34px] mt-[10px]">
+                    Phone Number
+                  </div>
+                  <div className="text-[16px] leading-[29px] italic">
+                    {phone}
+                  </div>
                 </div>
               ) : (
                 <div></div>
               )
             }
-            <div className="font-['Ailerons'] text-[31px] leading-[34px] mt-[10px]">
-              Shipping Address -1
-            </div>
             {shipAddress ? (
-              <div className="text-[16px] leading-[29px] italic">
-                {shipAddress}
+              <div>
+                <div className="font-['Ailerons'] text-[31px] leading-[34px] mt-[10px]">
+                  Shipping Address
+                </div>
+                <div className="text-[16px] leading-[29px] italic">
+                  {shipAddress}
+                </div>
               </div>
             ) : (
               <div className="text-[16px] leading-[29px]">
-                <p className="italic">You didn't set shipping address yet.</p>
+                <p className="italic">You didn't set phone number and shipping address yet.</p>
                 <Link to="/setting">
                   <div className="mx-auto cursor-pointer mt-[20px] w-[139px] font-['Ailerons'] text-[20px] leading-[30px] text-center border-2 border-[#252525] rounded-[70px] py-[10px] bg-black hover:bg-[#10CD00] hover:text-black">
                     SETTING
