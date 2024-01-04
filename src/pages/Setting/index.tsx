@@ -183,7 +183,7 @@ const Setting = () => {
   };
 
   return (
-    <div className="flex flex-col md:w-[92%] w-full md:px-[100px] md:py-[15px] px-[20px] py-[30px] mx-auto bg-transparent">
+    <div className="flex flex-col items-center justify-center md:w-[92%] w-full md:px-[100px] md:py-[15px] px-[20px] py-[30px] mx-auto bg-transparent">
       <div className="gap-[30px] text-[#F2F2F2] mx-auto md:m-0 md:w-[80%] fit w-[90%] rounded-[30px] px-[30px] py-[40px]">
         <div>
           <div className="grid gap-6 mb-6 md:grid-cols-2">
