@@ -184,91 +184,88 @@ const Setting = () => {
 
   return (
     <div className="flex flex-col md:w-[92%] w-full md:px-[100px] md:py-[15px] px-[20px] py-[30px] mx-auto bg-transparent">
-      <div className="bg-black border gap-[30px] text-[#F2F2F2] border-[#252525] mx-auto md:m-0 md:w-[80%] fit w-[90%] rounded-[30px] px-[30px] py-[40px]">
+      <div className="gap-[30px] text-[#F2F2F2] mx-auto md:m-0 md:w-[80%] fit w-[90%] rounded-[30px] px-[30px] py-[40px]">
         <div>
-          <div className="font-['Ailerons'] text-[31px] leading-[34px] my-[10px] text-center">
-            Your name
-          </div>
           <div className="grid gap-6 mb-6 md:grid-cols-2">
-            <div>
+            <div className="flex flex-col">
+              <label className="text-[12px] mb-2">First Name</label>
               <input
                 type="text"
                 id="first_name"
-                className="focus:border focus:border-[#10CD00] hover:border hover:border-[#828282] border border-[#333333] md:w-[100%] w-[100%] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[5px] pl-[25px] py-[0px]"
-                placeholder="First Name"
+                className="focus:border focus:border-[#3417FF] hover:border hover:border-[#828282] border border-[#333333] md:w-[100%] w-[100%] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[5px] pl-[25px] py-[0px]"
+                placeholder="JOHN"
                 onChange={(e) => { setFirstName(e.target.value) }}
-              ></input>
+              />
             </div>
-            <div>
+            <div className="flex flex-col">
+              <label className="text-[12px] mb-2">Last Name</label>
               <input
                 type="text"
                 id="last_name"
-                className="focus:border focus:border-[#10CD00] hover:border hover:border-[#828282] border border-[#333333] md:w-[100%] w-[100%] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[5px] pl-[25px] py-[0px]"
-                placeholder="Last Name"
+                className="focus:border focus:border-[#3417FF] hover:border hover:border-[#828282] border border-[#333333] md:w-[100%] w-[100%] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[5px] pl-[25px] py-[0px]"
+                placeholder="DOE"
                 onChange={(e) => { setLastName(e.target.value) }}
-              ></input>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div className="flex flex-col justify-center md:flex-row">
-            <div className="font-['Ailerons'] text-[31px] leading-[34px] my-[10px] text-center mr-[50px]">
-              Phone Number
-            </div>
-            <div>
-              <StyledPhoneInput
-                country={'us'}
-                placeholder="(+1)"
-                value={phone}
-                onChange={setPhone}
-                containerStyle={{
-                  border: "solid 0px #333333",
-                  width: "100%",
-                  margin: "auto",
-                }}
-                inputStyle={{
-                  color: "white",
-                  background: "transparent",
-                  border: "solid 1px #333333",
-                  fontSize: "20px",
-                  height: "54px",
-                  width: "100%"
-                }}
-                buttonStyle={{
-                  background: "transparent",
-                  border: "solid 0px",
-                  borderRight: "solid 1px #333333",
-                }}
-                dropdownStyle={{
-                  background: "black",
-                }}
               />
             </div>
           </div>
         </div>
-        <div className="font-['Ailerons'] text-[31px] leading-[34px] my-[10px] text-center">
+        <div>
+          <div className="">
+            <label className="text-[12px] mb-2">
+              Phone Number
+            </label>
+            <StyledPhoneInput
+              country={'us'}
+              placeholder="(+1)"
+              value={phone}
+              onChange={setPhone}
+              containerStyle={{
+                border: "solid 0px #333333",
+                width: "100%",
+                margin: "auto",
+              }}
+              inputStyle={{
+                color: "white",
+                background: "transparent",
+                border: "solid 1px #333333",
+                fontSize: "20px",
+                height: "54px",
+                width: "100%"
+              }}
+              buttonStyle={{
+                background: "transparent",
+                border: "solid 0px",
+                borderRight: "solid 1px #333333",
+              }}
+              dropdownStyle={{
+                background: "black",
+              }}
+            />
+          </div>
+        </div>
+        <div className="font-['Ailerons'] text-[31px] leading-[34px] mt-[20px] mb-[10px]">
           Shipping Address
         </div>
         <Tabs
-          className="text-center text-gray-400 bg-transparent"
+          className="text-gray-400 bg-transparent"
           selectedIndex={tabIndex}
           onSelect={(index) => setTabIndex(index)}
         >
           <TabList>
-            <Tab>Domestic US</Tab>
-            <Tab>International</Tab>
+            <Tab selectedClassName="bg-[#382f75] rounded-t-lg">Domestic US</Tab>
+            <Tab selectedClassName="bg-[#382f75] rounded-t-lg">International</Tab>
           </TabList>
           <TabPanel className="">
             <div className="App flex flex-col md:flex-row justify-between items-center">
               <input
                 type="text"
                 onChange={(e) => setInputAddress(e.target.value)}
-                className="focus:border focus:border-[#10CD00] hover:border hover:border-[#828282] border border-[#333333] md:w-[60%] w-[100%] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[20px] pl-[25px] py-[0px]"
+                className="focus:border focus:border-[#3417FF] hover:border hover:border-[#828282] border border-[#333333] md:w-[60%] w-[100%] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[20px] pl-[25px] py-[0px]"
                 placeholder=""
               ></input>
               <div
                 onClick={ValidateUS}
-                className="cursor-pointer mt-[20px] w-[139px] font-['Ailerons'] text-[20px] leading-[30px] text-center border-2 border-[#252525] rounded-[10px] py-[10px] bg-black hover:bg-[#10CD00] hover:text-black"
+                className="cursor-pointer mt-[20px] w-[139px] font-['Ailerons'] text-[20px] leading-[30px] text-center rounded-lg py-[10px] bg-[#3417FF] hover:bg-[#2612a8] border-[#3417FF] border-[1.5px] border-solid"
               >
                 Validate
               </div>
@@ -292,14 +289,14 @@ const Setting = () => {
             {isChecked ? (
               <div
                 onClick={updateMessage}
-                className="mx-auto cursor-pointer mt-[20px] w-[139px] font-['Ailerons'] text-[20px] leading-[30px] text-center border-2 border-[#252525] rounded-[70px] py-[10px] bg-black hover:bg-[#10CD00] hover:text-black"
+                className="w-full cursor-pointer mt-[20px] font-['Ailerons'] text-[20px] leading-[30px] text-center rounded-lg py-[10px] bg-[#3417FF] hover:bg-[#2612a8] border-[#3417FF] border-[1.5px] border-solid"
               >
                 UPDATE
               </div>
             ) : (
               <div
                 onClick={signMessage}
-                className="mx-auto cursor-pointer mt-[20px] w-[139px] font-['Ailerons'] text-[20px] leading-[30px] text-center border-2 border-[#252525] rounded-[70px] py-[10px] bg-black hover:bg-[#10CD00] hover:text-black"
+                className="w-full cursor-pointer mt-[20px] font-['Ailerons'] text-[20px] leading-[30px] text-center rounded-lg py-[10px] bg-[#3417FF] hover:bg-[#2612a8] border-[#3417FF] border-[1.5px] border-solid"
               >
                 SAVE
               </div>
@@ -310,7 +307,7 @@ const Setting = () => {
               <input
                 type="text"
                 onChange={(e) => setInputAddress(e.target.value)}
-                className="focus:border focus:border-[#10CD00] hover:border hover:border-[#828282] border border-[#333333] md:w-[60%] w-[100%] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[20px] pl-[25px] py-[0px]"
+                className="focus:border focus:border-[#3417FF] hover:border hover:border-[#828282] border border-[#333333] md:w-[60%] w-[100%] h-[54px] bg-black font-['Poppins'] text-[16px] leading-[30px] mt-[20px] pl-[25px] py-[0px]"
                 placeholder=""
               ></input>
               <div className="mx-[10px] md:w-[30%] w-[100%]">
@@ -323,7 +320,7 @@ const Setting = () => {
               </div>
               <div
                 onClick={ValidateGlobal}
-                className="mx-auto cursor-pointer mt-[20px] w-[139px] font-['Ailerons'] text-[20px] leading-[30px] text-center border-2 border-[#252525] rounded-[10px] py-[10px] bg-black hover:bg-[#10CD00] hover:text-black"
+                className="cursor-pointer mt-[20px] w-[139px] font-['Ailerons'] text-[20px] leading-[30px] text-center rounded-lg py-[10px] bg-[#3417FF] hover:bg-[#2612a8] border-[#3417FF] border-[1.5px] border-solid"
               >
                 Validate
               </div>
@@ -347,14 +344,14 @@ const Setting = () => {
             {isChecked ? (
               <div
                 onClick={updateMessage}
-                className="mx-auto cursor-pointer mt-[20px] w-[139px] font-['Ailerons'] text-[20px] leading-[30px] text-center border-2 border-[#252525] rounded-[70px] py-[10px] bg-black hover:bg-[#10CD00] hover:text-black"
+                className="w-full cursor-pointer mt-[20px] font-['Ailerons'] text-[20px] leading-[30px] text-center rounded-lg py-[10px] bg-[#3417FF] hover:bg-[#2612a8] border-[#3417FF] border-[1.5px] border-solid"
               >
                 UPDATE
               </div>
             ) : (
               <div
                 onClick={signMessage}
-                className="mx-auto cursor-pointer mt-[20px] w-[139px] font-['Ailerons'] text-[20px] leading-[30px] text-center border-2 border-[#252525] rounded-[70px] py-[10px] bg-black hover:bg-[#10CD00] hover:text-black"
+                className="w-full cursor-pointer mt-[20px] font-['Ailerons'] text-[20px] leading-[30px] text-center rounded-lg py-[10px] bg-[#3417FF] hover:bg-[#2612a8] border-[#3417FF] border-[1.5px] border-solid"
               >
                 SAVE
               </div>
