@@ -57,7 +57,7 @@ function Collection() {
     <div>
       <div className="container mx-auto mt-[18px]">
         {!isLoading && nfts.length === 0 && (
-          <h1 className="text-5xl text-center mx-auto mt-32">
+          <h1 className="text-[24px] text-center mx-auto mt-32">
             No Collection Found
           </h1>
         )}
