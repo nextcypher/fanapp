@@ -7,11 +7,12 @@ import {
   ALCHEMY_API_KEY,
 } from "../../utils/api.contant";
 import NFTCard from "../../components/NFTCard";
+import ProgressBar from "components/ProgressBar";
 
 function Collection() {
   const { library, account } = useWeb3React();
   const [nfts, setNFTs] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const fetchURL = `${baseURL + ALCHEMY_API_KEY}/getNFTs/?owner=${account}`;
   const options = {
     method: "GET",
@@ -20,21 +21,24 @@ function Collection() {
     headers: { accept: "application/json" },
   };
   const fetchCollection = async () => {
+    console.log(fetchURL);
     const itemArray = [];
+    console.log("start");
+    setIsLoading(true);
     axios
       .request(options)
       .then(function (response) {
         response?.data?.ownedNfts.map((nft) => {
           itemArray.push(nft.metadata);
         });
+        setIsLoading(false);
+        setNFTs(itemArray);
       })
       .catch(function (error) {
         console.error(error);
+        setIsLoading(false);
       });
-    await new Promise((r) => setTimeout(r, 5000));
-    console.log("itemArray", itemArray);
-    setNFTs(itemArray);
-    setIsLoading(true);
+    // await new Promise((r) => setTimeout(r, 5000));
   };
 
   useEffect(() => {
@@ -44,7 +48,9 @@ function Collection() {
   });
 
   useEffect(() => {
-    fetchCollection();
+    if (account) {
+      fetchCollection();
+    }
   }, [account]);
 
   return (
@@ -55,6 +61,12 @@ function Collection() {
             No Collection Found
           </h1>
         )}
+        {
+          isLoading ?
+            <div className="w-[70%] h-[50vh] m-auto flex items-center justify-center">
+              <ProgressBar startFlag={isLoading} />
+            </div> : ""
+        }
         <div className="grid grid-cols-5 gap-4">
           {nfts.map((token) => (
             <NFTCard key={token.name} nft={token} />
